@@ -10,7 +10,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class BeatBot implements KeyListener, BeatListener, BarListener {
 	
-	private static final int SPEED = 2;
+	private static final int SPEED = 1;
 	
 	private enum CompassDirection { Up, Down, Left, Right };
 	
@@ -56,9 +56,28 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 		this.beatMachine.addBarListener(this);
 		
 		switch (this.botIndex) {
+		
 		case One:
 			
 			this.image = new Image("assets/BandMemberOne.png");
+			
+			break;
+			
+		case Two:
+			
+			this.image = new Image("assets/BandMemberTwo.png");
+			
+			break;
+			
+		case Three:
+			
+			this.image = new Image("assets/BandMemberThree.png");
+			
+			break;
+			
+		case Four:
+			
+			this.image = new Image("assets/BandMemberFour.png");
 			
 			break;
 

@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Game;
+import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 
 public strictfp final class Launcher {
@@ -16,9 +16,10 @@ public strictfp final class Launcher {
 		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
 		
 		// Start the game!
-		Game game = new BeatBotsGame();
+		BeatBotsGame beatBotsGame = new BeatBotsGame();
+		ScalableGame scalableGame = new ScalableGame(beatBotsGame, 640, 480, true);
 		
-		AppGameContainer appGameContainer = new AppGameContainer(game);
+		AppGameContainer appGameContainer = new AppGameContainer(scalableGame);
 		
 		appGameContainer.setDisplayMode(640, 480, false);
 		

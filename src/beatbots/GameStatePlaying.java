@@ -29,7 +29,11 @@ public class GameStatePlaying extends BasicGameState {
 		
 		this.beatBots = new ArrayList<BeatBot>();
 		
-		this.beatBots.add(new BeatBot(this.beatMachine, BotIndex.One, new Vector2f(640f / 2f, 480f / 2f)));
+		Vector2f center = new Vector2f(640f / 2f, 480f / 2f);
+		
+		this.beatBots.add(new BeatBot(this.beatMachine, BotIndex.One, center.copy().add(new Vector2f(-64f, 0f))));
+		this.beatBots.add(new BeatBot(this.beatMachine, BotIndex.Two, center.copy().add(new Vector2f(0f, 0f))));
+		this.beatBots.add(new BeatBot(this.beatMachine, BotIndex.Three, center.copy().add(new Vector2f(64f, 0f))));
 	}
 	
 	@Override
