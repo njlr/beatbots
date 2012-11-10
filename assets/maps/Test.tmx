@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.0" orientation="orthogonal" width="10" height="7" tilewidth="64" tileheight="64" eyeDistance="100.0" viewportWidth="640" viewportHeight="480">
+ <tileset firstgid="1" name="Beats" tilewidth="64" tileheight="64">
+  <image source="../Tiles.png"/>
+  <tile id="0">
+   <properties>
+    <property name="Beat" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Beat" value="2"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Beat" value="3"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Layer 1" width="10" height="7" viewPlaneDistance="0.0" viewPlaneInfinitelyFarAway="false" tileWidth="64" tileHeight="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgGAXYAABs1fqEGAEAAA==
+  </data>
+ </layer>
+</map>

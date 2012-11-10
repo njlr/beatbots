@@ -13,9 +13,12 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import beatbots.simulation.BeatBot;
 import beatbots.simulation.BeatMachine;
+import beatbots.simulation.BeatMap;
 import beatbots.simulation.BotIndex;
 
 public class GameStatePlaying extends BasicGameState {
+	
+	private BeatMap beatMap;
 	
 	private BeatMachine beatMachine;
 	
@@ -24,6 +27,8 @@ public class GameStatePlaying extends BasicGameState {
 	public GameStatePlaying() {
 		
 		super();
+		
+		this.beatMap = new BeatMap("assets/maps/Test.tmx");
 		
 		this.beatMachine = new BeatMachine();
 		
@@ -39,6 +44,8 @@ public class GameStatePlaying extends BasicGameState {
 	@Override
 	public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 		
+		this.beatMap.init(gameContainer);
+		
 		this.beatMachine.init(gameContainer);
 		
 		for (BeatBot i : this.beatBots) {
@@ -48,7 +55,9 @@ public class GameStatePlaying extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer gameContainer, StateBasedGame arg1, int delta) throws SlickException {
+	public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+		
+		this.beatMap.update(gameContainer, delta);
 		
 		this.beatMachine.update(gameContainer, delta);
 		
@@ -62,6 +71,8 @@ public class GameStatePlaying extends BasicGameState {
 	public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 		
 		graphics.setBackground(new Color(100, 149, 237));
+		
+		this.beatMap.render(gameContainer, graphics);
 		
 		for (BeatBot i : this.beatBots) {
 			
