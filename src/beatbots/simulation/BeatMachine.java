@@ -7,7 +7,7 @@ import org.newdawn.slick.GameContainer;
 
 public strictfp final class BeatMachine {
 
-	private static final int BEAT_TIME = 100;
+	private static final int BEAT_TIME = 1000;
 	
 	private static final int BEATS_PER_BAR = 8;
 	
@@ -37,7 +37,7 @@ public strictfp final class BeatMachine {
 	
 	public void update(GameContainer gameContainer, int delta) {
 		
-		this.beatTimer += delta / 1000f;
+		this.beatTimer += delta;
 		
 		if (this.beatTimer >= BEAT_TIME) {
 			

@@ -3,14 +3,17 @@ package beatbots;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import beatbots.simulation.BeatBot;
 import beatbots.simulation.BeatMachine;
+import beatbots.simulation.BotIndex;
 
 public class GameStatePlaying extends BasicGameState {
 	
@@ -25,6 +28,8 @@ public class GameStatePlaying extends BasicGameState {
 		this.beatMachine = new BeatMachine();
 		
 		this.beatBots = new ArrayList<BeatBot>();
+		
+		this.beatBots.add(new BeatBot(this.beatMachine, BotIndex.One, new Vector2f(640f / 2f, 480f / 2f)));
 	}
 	
 	@Override
@@ -51,6 +56,8 @@ public class GameStatePlaying extends BasicGameState {
 	
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+		
+		graphics.setBackground(new Color(100, 149, 237));
 		
 		for (BeatBot i : this.beatBots) {
 			

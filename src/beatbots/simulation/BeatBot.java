@@ -2,8 +2,10 @@ package beatbots.simulation;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class BeatBot implements KeyListener, BeatListener, BarListener {
@@ -25,6 +27,8 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 	private Vector2f position;
 	private Vector2f velocity;
 	
+	private Image image;
+	
 	public BeatBot(BeatMachine beatMachine, BotIndex botIndex, Vector2f startPostion) {
 		
 		super();
@@ -39,7 +43,7 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 		this.velocity = new Vector2f();
 	}
 	
-	public void init(GameContainer gameContainer) {
+	public void init(GameContainer gameContainer) throws SlickException {
 		
 		this.position.set(this.startPosition);
 		this.velocity.set(0f, 0f);
@@ -50,6 +54,20 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 		
 		this.beatMachine.addBeatListener(this);
 		this.beatMachine.addBarListener(this);
+		
+		switch (this.botIndex) {
+		case One:
+			
+			this.image = new Image("assets/BandMemberOne.png");
+			
+			break;
+
+		default:
+			
+			this.image = null;
+			
+			break;
+		}
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
@@ -59,7 +77,10 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 	
 	public void render(GameContainer gameContainer, Graphics graphics) {
 		
-		
+		graphics.drawImage(
+				this.image, 
+				this.position.getX() - this.image.getWidth() / 2, 
+				this.position.getY() - this.image.getHeight() / 2);
 	}
 	
 	public void destroy() {
@@ -252,13 +273,13 @@ public strictfp final class BeatBot implements KeyListener, BeatListener, BarLis
 			
 			case Up:
 				
-				this.velocity.set(0f, SPEED);
+				this.velocity.set(0f, -SPEED);
 				
 				break;
 				
 			case Down:
 				
-				this.velocity.set(0f, -SPEED);
+				this.velocity.set(0f, SPEED);
 				
 				break;
 				
