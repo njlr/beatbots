@@ -60,7 +60,37 @@ public strictfp final class BeatBotManager {
 					case 1: 
 						
 						this.spawn(gameContainer, Beat.Red, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
-						System.out.println(".");
+						
+						break;
+						
+					case 2: 
+						
+						this.spawn(gameContainer, Beat.Green, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						
+						break;
+						
+					case 3: 
+						
+						this.spawn(gameContainer, Beat.Blue, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						
+						break;
+						
+					case 4: 
+						
+						this.spawn(gameContainer, Beat.Yellow, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						
+						break;
+						
+					case 5: 
+						
+						this.spawn(gameContainer, Beat.Purple, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						
+						break;
+						
+					case 6: 
+						
+						this.spawn(gameContainer, Beat.Orange, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						
 						break;
 					}
 				}
@@ -101,27 +131,21 @@ public strictfp final class BeatBotManager {
 	
 	public void spawn(GameContainer gameContainer, Beat beatBotType, Vector2f startPosition) throws SlickException {
 		
-		switch (beatBotType) {
-		
-		case None:
+		if (beatBotType == Beat.None) {
 			
 			BeatBotNone beatBotNone = new BeatBotNone(this.beatMachine, this.bulletManager, startPosition);
 			
 			this.beatBots.add(beatBotNone);
 			
 			beatBotNone.init(gameContainer);
+		}
+		else {
 			
-			break;
+			BeatBotColored beatBotColored = new BeatBotColored(this.beatMachine, this.bulletManager, startPosition, this.beatTokenManager, beatBotType);
 			
-		case Red: 
+			this.beatBots.add(beatBotColored);
 			
-			BeatBotRed beatBotRed = new BeatBotRed(this.beatMachine, this.bulletManager, startPosition, this.beatTokenManager);
-			
-			this.beatBots.add(beatBotRed);
-			
-			beatBotRed.init(gameContainer);
-			
-			break;
+			beatBotColored.init(gameContainer);
 		}
 	}
 }

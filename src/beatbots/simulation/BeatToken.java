@@ -57,7 +57,7 @@ public strictfp final class BeatToken implements Collider {
 		
 		if (this.position.y > 480f + BUFFER) {
 			
-			this.isActive = false;
+			this.destroy();
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package beatbots.simulation;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -26,6 +28,9 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 	
 	private float desY;
 	
+	protected Animation animation;
+	protected Color color;
+	
 	public boolean isActive() {
 		
 		return this.isActive;
@@ -35,6 +40,17 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 	public Vector2f getPosition() {
 		
 		return this.position;
+	}
+	
+	@Override
+	public float getRadius() {
+		
+		return this.animation.getWidth() / 2;
+	}
+	
+	public boolean isMarked() {
+		
+		return this.isMarked;
 	}
 	
 	public BeatBot(BeatMachine beatMachine, BulletManager bulletManager, Vector2f startPosition) {
@@ -49,6 +65,8 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 		this.startPosition = startPosition.copy();
 		
 		this.position = new Vector2f();
+		
+		this.color = Color.white;
 	}
 	
 	public void init(GameContainer gameContainer) throws SlickException {
@@ -97,13 +115,27 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 		}
 	}
 	
-	public void render(GameContainer gameContainer, Graphics graphics) {
+	public strictfp void render(GameContainer gameContainer, Graphics graphics) {
 		
+		graphics.drawAnimation(
+				this.animation, 
+				this.getPosition().getX() - this.animation.getWidth() / 2, 
+				this.getPosition().getY() - this.animation.getHeight() / 2, 
+				this.color);
 	}
 	
 	public void destroy() {
 		
-		this.isActive = false;
+		if (this.isActive) {
+			
+			this.isActive = false;
+			
+			this.onDestroy();
+		}
+	}
+	
+	protected void onDestroy() {
+		
 	}
 	
 	@Override

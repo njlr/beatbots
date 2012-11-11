@@ -10,16 +10,8 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp class BeatBotNone extends BeatBot {
 	
-	private Animation animation;
-	
 	private Beat beatMark;
-	private Color color;
-
-	@Override
-	public float getRadius() {
-		
-		return this.animation.getWidth() / 2;
-	}
+	private Color beatColor;
 	
 	public BeatBotNone(BeatMachine beatMachine, BulletManager bulletManager, Vector2f startPosition) {
 		
@@ -34,8 +26,6 @@ public strictfp class BeatBotNone extends BeatBot {
 		this.animation = new Animation(new Image[] { new Image("assets/BeatBot1Frame1.png"), new Image("assets/BeatBot1Frame2.png") }, 200, true);
 		
 		this.beatMark = Beat.None;
-		
-		this.color = Utils.getBeatColor(this.beatMark);
 	}
 	
 	@Override
@@ -43,11 +33,14 @@ public strictfp class BeatBotNone extends BeatBot {
 		
 		super.render(gameContainer, graphics);
 		
-		graphics.drawAnimation(
-				this.animation, 
-				this.getPosition().getX() - this.animation.getWidth() / 2, 
-				this.getPosition().getY() - this.animation.getHeight() / 2, 
-				this.color);
+		if (this.isMarked()) {
+			
+			float r = this.getRadius();
+			
+			graphics.setColor(this.beatColor);
+			
+			graphics.drawOval(this.getPosition().getX() - r, this.getPosition().getY() - r, r * 2, r * 2);
+		}
 	}
 	
 	@Override
@@ -68,6 +61,6 @@ public strictfp class BeatBotNone extends BeatBot {
 		
 		this.beatMark = beat;
 		
-		this.color = Utils.getBeatColor(this.beatMark);
+		this.beatColor = Utils.getBeatColor(this.beatMark);
 	}
 }
