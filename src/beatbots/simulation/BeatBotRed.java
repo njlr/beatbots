@@ -8,22 +8,25 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public strictfp class BeatBotNone extends BeatBot {
+public strictfp class BeatBotRed extends BeatBot {
+	
+	private BeatTokenManager beatTokenManager;
 	
 	private Animation animation;
 	
-	private Beat beatMark;
 	private Color color;
-
+	
 	@Override
 	public float getRadius() {
 		
 		return this.animation.getWidth() / 2;
 	}
-	
-	public BeatBotNone(BeatMachine beatMachine, BulletManager bulletManager, Vector2f startPosition) {
+
+	public BeatBotRed(BeatMachine beatMachine, BulletManager bulletManager, Vector2f startPosition, BeatTokenManager beatTokenManager) {
 		
 		super(beatMachine, bulletManager, startPosition);
+		
+		this.beatTokenManager = beatTokenManager;
 	}
 	
 	@Override
@@ -31,11 +34,9 @@ public strictfp class BeatBotNone extends BeatBot {
 		
 		super.init(gameContainer);
 		
-		this.animation = new Animation(new Image[] { new Image("assets/BeatBot1Frame1.png"), new Image("assets/BeatBot1Frame2.png") }, 200, true);
+		this.animation = new Animation(new Image[] { new Image("assets/BeatBot2Frame1.png"), new Image("assets/BeatBot2Frame2.png") }, 200, true);
 		
-		this.beatMark = Beat.None;
-		
-		this.color = Utils.getBeatColor(this.beatMark);
+		this.color = Utils.getBeatColor(Beat.Red);
 	}
 	
 	@Override
@@ -51,23 +52,10 @@ public strictfp class BeatBotNone extends BeatBot {
 	}
 	
 	@Override
-	public strictfp void beat() {
+	public strictfp void destroy() {
 		
-		super.beat();
+		super.destroy();
 		
-		if (!this.isActive()) {
-			
-			// TODO: Play beat!
-		}
-	}
-	
-	@Override
-	public strictfp void mark(Beat beat) {
-		
-		super.mark(beat);
-		
-		this.beatMark = beat;
-		
-		this.color = Utils.getBeatColor(this.beatMark);
+		this.beatTokenManager.drop(this.getPosition(), Beat.Red);
 	}
 }

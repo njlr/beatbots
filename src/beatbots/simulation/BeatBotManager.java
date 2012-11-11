@@ -14,18 +14,20 @@ public strictfp final class BeatBotManager {
 	
 	private BeatMachine beatMachine;
 	private BulletManager bulletManager;
+	private BeatTokenManager beatTokenManager;
 	
 	private String mapFilePath;
 	
 	private List<BeatBot> beatBots;
 	private Stack<BeatBot> beatBotsToRemove;
 	
-	public BeatBotManager(BeatMachine beatMachine, BulletManager bulletManager, String mapFilePath) {
+	public BeatBotManager(BeatMachine beatMachine, BulletManager bulletManager, BeatTokenManager beatTokenManager, String mapFilePath) {
 		
 		super();
 		
 		this.beatMachine = beatMachine;
 		this.bulletManager = bulletManager;
+		this.beatTokenManager = beatTokenManager;
 		
 		this.mapFilePath = mapFilePath;
 		
@@ -51,8 +53,14 @@ public strictfp final class BeatBotManager {
 					
 					case 0: 
 						
-						this.spawn(gameContainer, Beat.None, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() - 1.5f) * 32f));
+						this.spawn(gameContainer, Beat.None, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
 						
+						break;
+						
+					case 1: 
+						
+						this.spawn(gameContainer, Beat.Red, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
+						System.out.println(".");
 						break;
 					}
 				}
@@ -102,6 +110,16 @@ public strictfp final class BeatBotManager {
 			this.beatBots.add(beatBotNone);
 			
 			beatBotNone.init(gameContainer);
+			
+			break;
+			
+		case Red: 
+			
+			BeatBotRed beatBotRed = new BeatBotRed(this.beatMachine, this.bulletManager, startPosition, this.beatTokenManager);
+			
+			this.beatBots.add(beatBotRed);
+			
+			beatBotRed.init(gameContainer);
 			
 			break;
 		}

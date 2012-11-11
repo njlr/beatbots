@@ -1,33 +1,43 @@
 package beatbots.simulation;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 public strictfp abstract class BeatBot implements Collider, BeatListener, BarListener {
 	
+	private static final float SPEED = 0.02f;
+
 	private BeatMachine beatMachine;
 	private BulletManager bulletManager;
+	
+	private Vector2f startPosition;
 	
 	private boolean isActive;
 	
 	private boolean isMarked;
 	
-	private Beat beatMark;
-	private Color beatColor;
+	private Vector2f position;
+	
+	private boolean isGoingRight;
+	
+	private int hops;
+	
+	private float desY;
 	
 	public boolean isActive() {
 		
 		return this.isActive;
 	}
 	
-	public Color getBeatColor() {
+	@Override
+	public Vector2f getPosition() {
 		
-		return this.beatColor;
+		return this.position;
 	}
 	
-	public BeatBot(BeatMachine beatMachine, BulletManager bulletManager) {
+	public BeatBot(BeatMachine beatMachine, BulletManager bulletManager, Vector2f startPosition) {
 		
 		super();
 		
@@ -35,16 +45,24 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 		this.bulletManager = bulletManager;
 		
 		this.isActive = true;
+		
+		this.startPosition = startPosition.copy();
+		
+		this.position = new Vector2f();
 	}
 	
 	public void init(GameContainer gameContainer) throws SlickException {
 		
-		this.beatMark = Beat.None;
-		
-		this.beatColor = Utils.getBeatColor(this.beatMark);
-		
 		this.beatMachine.addBeatListener(this);
 		this.beatMachine.addBarListener(this);
+		
+		this.position.set(this.startPosition);
+		
+		this.desY = this.position.y;
+		
+		this.isGoingRight = true;
+		
+		this.hops = 0;
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
@@ -59,6 +77,22 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 					
 					i.destroy();
 				}
+			}
+		}
+		
+		if (this.position.y < this.desY) {
+			
+			this.position.y += SPEED * delta;
+		}
+		else {
+			
+			if (this.isGoingRight) {
+				
+				this.position.x += SPEED * delta;
+			}
+			else {
+				
+				this.position.x -= SPEED * delta;
 			}
 		}
 	}
@@ -82,18 +116,23 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 		
 		if (this.isMarked) {
 			
-			// TODO: Play beat!
-			
 			this.destroy();
+		}
+		
+		this.hops++;
+		
+		if (this.hops == 5) {
+			
+			this.hops = 0;
+			
+			this.desY = this.position.y + 4f;
+			
+			this.isGoingRight = !this.isGoingRight;
 		}
 	}
 	
-	private void mark(Beat beat) {
+	public void mark(Beat beat) {
 		
 		this.isMarked = true;
-		
-		this.beatMark = beat;
-		
-		this.beatColor = Utils.getBeatColor(this.beatMark);
 	}
 }

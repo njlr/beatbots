@@ -6,6 +6,7 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class BeatTokenManager {
@@ -13,6 +14,8 @@ public strictfp final class BeatTokenManager {
 	private Ship ship;
 	
 	private List<BeatToken> beatTokens;
+	
+	private Image imageToken;
 
 	public BeatTokenManager(Ship ship) {
 		
@@ -23,8 +26,9 @@ public strictfp final class BeatTokenManager {
 		this.beatTokens = new ArrayList<BeatToken>(8);
 	}
 	
-	public void init(GameContainer gameContainer) {
+	public void init(GameContainer gameContainer) throws SlickException {
 		
+		this.imageToken = new Image("assets/Token.png");
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
@@ -56,11 +60,11 @@ public strictfp final class BeatTokenManager {
 		}
 	}
 	
-	public void drop(Image image, Vector2f position, Beat beat) {
+	public void drop(Vector2f position, Beat beat) {
 		
 		BeatToken beatToken = this.getFreeBeatToken();
 		
-		beatToken.drop(image, position, beat);
+		beatToken.drop(this.imageToken, position, beat);
 	}
 	
 	private BeatToken getFreeBeatToken() {

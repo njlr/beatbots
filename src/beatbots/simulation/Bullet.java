@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class Bullet implements Collider {
 	
-	private static final float BUFFER = 64f;
+	private static final float BUFFER = 0f;
 
 	private boolean isActive;
 	
