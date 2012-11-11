@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="200" tilewidth="32" tileheight="32">
  <tileset firstgid="1" source="../tiles/Beats.tsx"/>
+ <tileset firstgid="9" source="../tiles/Beats.tsx"/>
  <layer name="Background" width="20" height="200">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3DQQ0AAAwDoXvWv+IJGSSsmqqqqqqqqqqqqqqqqqqqqu8fQrvJ4YA+AAA=
@@ -8,7 +9,7 @@
  </layer>
  <layer name="Meta" width="20" height="200">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3MoQ0AAAjAMFD8/zEPYAgC0yaziwAAAAAAAAAAAAAAAAAAAPhVx/zmcvlrjj0yZIA+AAA=
+   H4sIAAAAAAAAA+3SSwrDMAwFwGxTx+n9b1u6KASh2DLtrjMgyI+HrGjbAAAAAAAAAAAAAAAAAPhnzy+rmneG+30xry/0dBby3tUu148fn7dSPcmLfcQ57YN3o/7i/Ed1DPLaQs7K/I7wXdbv9Vmf5N3tzew/Z3l3uzrb51boL9vFrN/P2Wd5lV5H5wV4Af2GQc2APgAA
   </data>
  </layer>
 </map>
