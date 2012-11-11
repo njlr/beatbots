@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="200" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="../tiles/Beats.tsx"/>
+ <layer name="Tile Layer 1" width="20" height="200">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3TSwqAMAwFwPq//43duBChpinV1SwGQRvSvOBRSjkAAAAAAAAAAAAAAAAAAOiyd9ZNA3pvP886X8/l9m5N1I2ae2TGbxnW6lt23jpnzw7vebbkXzu7BOej79m79tZFWdb2EWWzJ3pke2c8e0e5f/0PnThRkyyAPgAA
+  </data>
+ </layer>
+</map>
