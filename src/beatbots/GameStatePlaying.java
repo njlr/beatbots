@@ -3,12 +3,10 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import beatbots.simulation.BeatBotManager;
-import beatbots.simulation.BeatBotType;
 import beatbots.simulation.BeatMachine;
 import beatbots.simulation.BeatQueue;
 import beatbots.simulation.BeatTokenManager;
@@ -38,7 +36,7 @@ public class GameStatePlaying extends BasicGameState {
 		
 		this.bulletManager = new BulletManager();
 		
-		this.beatBotManager = new BeatBotManager(this.beatMachine, this.bulletManager);
+		this.beatBotManager = new BeatBotManager(this.beatMachine, this.bulletManager, "assets/maps/Test.tmx");
 		
 		this.ship = new Ship(this.beatQueue, this.bulletManager);
 		
