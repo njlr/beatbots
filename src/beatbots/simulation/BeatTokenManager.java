@@ -10,11 +10,15 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class BeatTokenManager {
 	
+	private Ship ship;
+	
 	private List<BeatToken> beatTokens;
 
-	public BeatTokenManager() {
+	public BeatTokenManager(Ship ship) {
 		
 		super();
+		
+		this.ship = ship;
 		
 		this.beatTokens = new ArrayList<BeatToken>(8);
 	}
@@ -30,6 +34,13 @@ public strictfp final class BeatTokenManager {
 			if (i.isActive()) {
 				
 				i.update(gameContainer, delta);
+				
+				if (Utils.checkCollision(this.ship, i)) {
+					
+					this.ship.collect(i.getBeat());
+					
+					i.destroy();
+				}
 			}
 		}
 	}

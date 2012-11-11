@@ -39,6 +39,11 @@ public strictfp final class BeatToken implements Collider {
 		return this.image.getWidth() / 2;
 	}
 	
+	public Beat getBeat() {
+		
+		return this.beat;
+	}
+	
 	public BeatToken() {
 		
 		super();
@@ -76,5 +81,10 @@ public strictfp final class BeatToken implements Collider {
 		this.beat = beat;
 		
 		this.color = Utils.getBeatColor(this.beat);
+	}
+	
+	public void destroy() {
+		
+		this.isActive = false;
 	}
 }

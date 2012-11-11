@@ -9,6 +9,13 @@ public strictfp final class Utils {
 		super();
 	}
 	
+	public static boolean checkCollision(Collider a, Collider b) {
+		
+		float d = a.getRadius() + b.getRadius();
+		
+		return (a.getPosition().distanceSquared(b.getPosition()) <= Math.pow(d, 2));
+	}
+	
 	public static Color getBeatColor(Beat beat) {
 		
 		Color color;

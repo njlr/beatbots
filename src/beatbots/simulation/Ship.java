@@ -117,6 +117,11 @@ public strictfp final class Ship implements Collider, KeyListener {
 				this.position.getX() - this.animationTilt.getWidth() / 2, 
 				this.position.getY() - this.animationTilt.getHeight() / 2);
 	}
+	
+	public void collect(Beat beat) {
+		
+		this.beatQueue.storeBeat(beat);
+	}
 
 	@Override
 	public void inputEnded() {
