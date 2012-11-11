@@ -97,13 +97,11 @@ public strictfp final class BeatBotManager {
 		
 		case None:
 			
-			BeatBotOne beatBotOne = new BeatBotOne(this.beatMachine, this.bulletManager, startPosition);
+			BeatBotNone beatBotNone = new BeatBotNone(this.beatMachine, this.bulletManager, startPosition);
 			
-			this.beatBots.add(beatBotOne);
+			this.beatBots.add(beatBotNone);
 			
-			beatBotOne.init(gameContainer);
-			
-			System.out.println("Spawned a 'None' type bot. ");
+			beatBotNone.init(gameContainer);
 			
 			break;
 		}

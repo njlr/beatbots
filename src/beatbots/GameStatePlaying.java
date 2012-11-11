@@ -3,9 +3,11 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import beatbots.simulation.Beat;
 import beatbots.simulation.BeatBotManager;
 import beatbots.simulation.BeatMachine;
 import beatbots.simulation.BeatQueue;
@@ -57,6 +59,8 @@ public class GameStatePlaying extends BasicGameState {
 		this.beatBotManager.init(gameContainer);
 		
 		this.ship.init(gameContainer);
+		
+		this.beatBotManager.spawn(gameContainer, Beat.None, new Vector2f(128f, 128f));
 	}
 
 	@Override

@@ -20,10 +20,6 @@ public strictfp final class BeatQueue {
 	public void init(GameContainer gameContainer) {
 		
 		this.beats.clear();
-		
-		this.beats.add(Beat.Red);
-		this.beats.add(Beat.Green);
-		this.beats.add(Beat.Blue);
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
