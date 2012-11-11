@@ -1,5 +1,6 @@
 package beatbots.simulation;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,14 +9,19 @@ import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public strictfp final class Ship implements KeyListener {
+public strictfp final class Ship implements Collider, KeyListener {
 	
-	private static final float DRAG_FACTOR = 0.975f;
+	private static final float DRAG_FACTOR = 0.96f;
 	
-	private static final float MAX_SPEED = 0.3f;
+	private static final float MAX_SPEED = 0.2f;
 	private static final float MAX_SPEED_SQUARED = MAX_SPEED * MAX_SPEED;
 	
-	private static final float THRUST = 0.03f;
+	private static final float THRUST = 0.0025f;
+	
+	private static final float BULLET_SPEED = 0.3f;
+	
+	private BeatQueue beatQueue;
+	private BulletManager bulletManager;
 	
 	private Vector2f position;
 	private Vector2f velocity;
@@ -23,11 +29,28 @@ public strictfp final class Ship implements KeyListener {
 	private boolean isSteeringLeft;
 	private boolean isSteeringRight;
 	
-	private Image imageShip;
+	private Animation animationTilt;
 	
-	public Ship() {
+	private Image imageBullet;
+	
+	@Override
+	public Vector2f getPosition() {
+		
+		return this.position;
+	}
+
+	@Override
+	public float getRadius() {
+		
+		return this.animationTilt.getWidth() / 2;
+	}
+	
+	public Ship(BeatQueue beatQueue, BulletManager bulletManager) {
 		
 		super();
+		
+		this.beatQueue = beatQueue;
+		this.bulletManager = bulletManager;
 		
 		this.position = new Vector2f();
 		this.velocity = new Vector2f();
@@ -35,7 +58,15 @@ public strictfp final class Ship implements KeyListener {
 
 	public void init(GameContainer gameContainer) throws SlickException {
 		
-		this.imageShip = new Image("assets/ShipForward.png");
+		Image frame0 = new Image("assets/ShipForward.png");
+		Image frame1 = new Image("assets/ShipTiltingFrame1.png");
+		Image frame2 = new Image("assets/ShipTiltingFrame2.png");
+		
+		this.animationTilt = new Animation(new Image[] { frame0, frame1, frame2 }, 120, false);
+		
+		this.animationTilt.setLooping(false);
+		
+		this.imageBullet = new Image("assets/PlayerBullet.png");
 		
 		this.position.set(640f / 2f, 480f - 128f);
 		this.velocity.set(0f, 0f);
@@ -53,11 +84,19 @@ public strictfp final class Ship implements KeyListener {
 			if (!this.isSteeringRight) {
 				
 				this.velocity.add(new Vector2f(-THRUST, 0f).scale(delta));
+				
+				this.animationTilt.update(delta);
 			}
 		}
 		else if (this.isSteeringRight) {
 			
 			this.velocity.add(new Vector2f(THRUST, 0f).scale(delta));
+			
+			this.animationTilt.update(delta);
+		}
+		else {
+			
+			this.animationTilt.restart();
 		}
 		
 		this.velocity.scale(DRAG_FACTOR);
@@ -73,10 +112,10 @@ public strictfp final class Ship implements KeyListener {
 	
 	public void render(GameContainer gameContainer, Graphics graphics) {
 		
-		graphics.drawImage(
-				this.imageShip, 
-				this.position.getX() - this.imageShip.getWidth() / 2, 
-				this.position.getY() - this.imageShip.getHeight() / 2);
+		graphics.drawAnimation(
+				this.animationTilt, 
+				this.position.getX() - this.animationTilt.getWidth() / 2, 
+				this.position.getY() - this.animationTilt.getHeight() / 2);
 	}
 
 	@Override
@@ -116,6 +155,14 @@ public strictfp final class Ship implements KeyListener {
 			this.isSteeringRight = true;
 			
 			break;
+			
+		case Input.KEY_UP:
+			
+		case Input.KEY_SPACE: 
+			
+			this.fire();
+			
+			break;
 		}
 	}
 
@@ -136,5 +183,14 @@ public strictfp final class Ship implements KeyListener {
 			
 			break;
 		}
+	}
+	
+	private void fire() {
+		
+		this.bulletManager.fire(
+				this.imageBullet, 
+				this.position.copy(), 
+				new Vector2f(0f, -BULLET_SPEED), 
+				this.beatQueue.getNextBeat());
 	}
 }

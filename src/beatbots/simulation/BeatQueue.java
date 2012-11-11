@@ -1,45 +1,51 @@
 package beatbots.simulation;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-public strictfp final class BeatQueue implements BeatListener, BarListener {
-
-	private BeatMachine beatMachine;
+public strictfp final class BeatQueue {
 	
 	private Queue<Beat> beats;
 	
-	public BeatQueue(BeatMachine beatMachine) {
+	public BeatQueue() {
 		
 		super();
 		
-		this.beatMachine = beatMachine;
-		
-		this.beatMachine.addBeatListener(this);
-		this.beatMachine.addBarListener(this);
+		this.beats = new LinkedList<Beat>();
 	}
 	
 	public void init(GameContainer gameContainer) {
 		
+		this.beats.clear();
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
+		
 		
 	}
 	
 	public void render(GameContainer gameContainer, Graphics graphics) {
 		
-	}
-
-	@Override
-	public void bar() {
 		
 	}
-
-	@Override
-	public void beat() {
+	
+	public void storeBeat(Beat beat) {
 		
+		this.beats.add(beat);
+	}
+	
+	public Beat getNextBeat() {
+		
+		if (this.beats.isEmpty()) {
+			
+			return Beat.None;
+		}
+		else {
+			
+			return this.beats.remove();
+		}
 	}
 }
