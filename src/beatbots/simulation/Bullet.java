@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 
-public strictfp final class Bullet {
+public strictfp final class Bullet implements Collider {
 	
 	private static final float BUFFER = 64f;
 
@@ -24,6 +24,23 @@ public strictfp final class Bullet {
 	public boolean isActive() {
 		
 		return this.isActive;
+	}
+	
+	@Override
+	public Vector2f getPosition() {
+		
+		return this.position;
+	}
+	
+	@Override
+	public float getRadius() {
+		
+		return 4f;
+	}
+	
+	public Beat getBeat() {
+		
+		return beat;
 	}
 	
 	public Bullet() {
@@ -48,7 +65,7 @@ public strictfp final class Bullet {
 		
 		if (isOutsideField) {
 			
-			this.isActive = false;
+			this.destroy();
 		}
 	}
 	
@@ -73,5 +90,10 @@ public strictfp final class Bullet {
 		this.beat = beat;
 		
 		this.color = Utils.getBeatColor(this.beat);
+	}
+	
+	public void destroy() {
+		
+		this.isActive = false;
 	}
 }
