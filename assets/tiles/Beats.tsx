@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="Beats" tilewidth="32" tileheight="32">
- <image source="../Beats.png" width="192" height="32"/>
+ <image source="../Beats.png" width="256" height="32"/>
  <tile id="0">
   <properties>
    <property name="Beat" value="1"/>
@@ -23,12 +23,17 @@
  </tile>
  <tile id="4">
   <properties>
-   <property name="Beat" value="5"/>
+   <property name="Beat" value="4"/>
   </properties>
  </tile>
  <tile id="5">
   <properties>
-   <property name="Beat" value="6"/>
+   <property name="Beat" value="5"/>
+  </properties>
+ </tile>
+ <tile id="6">
+  <properties>
+   <property name="Beat" value="0"/>
   </properties>
  </tile>
 </tileset>
