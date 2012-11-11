@@ -30,7 +30,7 @@ public strictfp class BeatBotColored extends BeatBot {
 			
 		//case Red:
 			
-			this.animation = new Animation(new Image[] { new Image("assets/BeatBot2Frame1.png"), new Image("assets/BeatBot2Frame2.png") }, 200, true);
+			this.animation = new Animation(new Image[] { new Image("assets/BeatBot2RightFrame1.png"), new Image("assets/BeatBot2RightFrame2.png") }, 200, true);
 			
 			//break;
 			
