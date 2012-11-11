@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="10" height="7" tilewidth="64" tileheight="64">
- <tileset firstgid="1" source="../tiles/Beats.tsx"/>
- <layer name="Beats" width="10" height="7">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgoA1gJEEtEwlqmUlQy0KCWlY0PgBGOwTKGAEAAA==
-  </data>
- </layer>
-</map>
