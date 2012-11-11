@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/controller.jar"/>
 	<classpathentry kind="lib" path="lib/guava-12.0.1.jar"/>
@@ -18,7 +19,6 @@
 	<classpathentry kind="lib" path="lib/packulike.jar"/>
 	<classpathentry kind="lib" path="lib/pedigree.jar"/>
 	<classpathentry kind="lib" path="lib/scalar.jar"/>
-	<classpathentry kind="lib" path="lib/slick-examples.jar"/>
 	<classpathentry kind="lib" path="lib/slick-sources.jar"/>
 	<classpathentry kind="lib" path="lib/slick-util-src.zip"/>
 	<classpathentry kind="lib" path="lib/slick-util.jar"/>
