@@ -52,9 +52,9 @@ public strictfp class BeatBotRed extends BeatBot {
 	}
 	
 	@Override
-	public strictfp void destroy() {
+	protected strictfp void onDestroy() {
 		
-		super.destroy();
+		super.onDestroy();
 		
 		this.beatTokenManager.drop(this.getPosition(), Beat.Red);
 	}

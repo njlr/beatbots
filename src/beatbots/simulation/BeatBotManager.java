@@ -60,7 +60,7 @@ public strictfp final class BeatBotManager {
 					case 1: 
 						
 						this.spawn(gameContainer, Beat.Red, new Vector2f((x + 0.5f) * tiledMap.getTileWidth(), (y - tiledMap.getHeight() + 15.5f) * 32f));
-						System.out.println(".");
+						
 						break;
 					}
 				}

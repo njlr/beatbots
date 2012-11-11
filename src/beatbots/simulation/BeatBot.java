@@ -103,7 +103,16 @@ public strictfp abstract class BeatBot implements Collider, BeatListener, BarLis
 	
 	public void destroy() {
 		
-		this.isActive = false;
+		if (this.isActive) {
+			
+			this.isActive = false;
+			
+			this.onDestroy();
+		}
+	}
+	
+	protected void onDestroy() {
+		
 	}
 	
 	@Override
