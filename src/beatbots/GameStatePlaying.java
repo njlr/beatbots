@@ -3,9 +3,12 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import beatbots.simulation.BeatBotManager;
+import beatbots.simulation.BeatBotType;
 import beatbots.simulation.BeatMachine;
 import beatbots.simulation.BeatQueue;
 import beatbots.simulation.BeatTokenManager;
@@ -22,6 +25,8 @@ public class GameStatePlaying extends BasicGameState {
 	
 	private BulletManager bulletManager;
 	
+	private BeatBotManager beatBotManager;
+	
 	private Ship ship;
 
 	public GameStatePlaying() {
@@ -32,6 +37,8 @@ public class GameStatePlaying extends BasicGameState {
 		this.beatQueue = new BeatQueue();
 		
 		this.bulletManager = new BulletManager();
+		
+		this.beatBotManager = new BeatBotManager(this.beatMachine, this.bulletManager);
 		
 		this.ship = new Ship(this.beatQueue, this.bulletManager);
 		
@@ -49,6 +56,8 @@ public class GameStatePlaying extends BasicGameState {
 		
 		this.bulletManager.init(gameContainer);
 		
+		this.beatBotManager.init(gameContainer);
+		
 		this.ship.init(gameContainer);
 	}
 
@@ -63,6 +72,8 @@ public class GameStatePlaying extends BasicGameState {
 		
 		this.bulletManager.update(gameContainer, delta);
 		
+		this.beatBotManager.update(gameContainer, delta);
+		
 		this.ship.update(gameContainer, delta);
 	}
 	
@@ -74,6 +85,8 @@ public class GameStatePlaying extends BasicGameState {
 		this.beatTokenManager.render(gameContainer, graphics);
 		
 		this.beatQueue.render(gameContainer, graphics);
+		
+		this.beatBotManager.render(gameContainer, graphics);
 		
 		this.ship.render(gameContainer, graphics);
 	}

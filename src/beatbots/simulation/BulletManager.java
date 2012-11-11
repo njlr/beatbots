@@ -11,6 +11,11 @@ public strictfp final class BulletManager {
 
 	private Bullet[] bullets = new Bullet[MAX_BULLET_COUNT];
 	
+	public Bullet[] getBullets() {
+		
+		return this.bullets;
+	}
+	
 	public BulletManager() {
 		
 		super();
