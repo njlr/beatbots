@@ -11,9 +11,9 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class Ship implements Collider, KeyListener {
 	
-	private static final float DRAG_FACTOR = 0.96f;
+	private static final float DRAG_FACTOR = 0.98f;
 	
-	private static final float MAX_SPEED = 0.2f;
+	private static final float MAX_SPEED = 0.4f;
 	private static final float MAX_SPEED_SQUARED = MAX_SPEED * MAX_SPEED;
 	
 	private static final float THRUST = 0.0025f;
@@ -84,22 +84,12 @@ public strictfp final class Ship implements Collider, KeyListener {
 			if (!this.isSteeringRight) {
 				
 				this.velocity.add(new Vector2f(-THRUST, 0f).scale(delta));
-				
-				this.animationTilt.update(delta);
 			}
 		}
 		else if (this.isSteeringRight) {
 			
 			this.velocity.add(new Vector2f(THRUST, 0f).scale(delta));
-			
-			this.animationTilt.update(delta);
 		}
-		else {
-			
-			this.animationTilt.restart();
-		}
-		
-		this.velocity.scale(DRAG_FACTOR);
 		
 		if (this.velocity.lengthSquared() > MAX_SPEED_SQUARED) {
 			
@@ -108,6 +98,23 @@ public strictfp final class Ship implements Collider, KeyListener {
 		}
 		
 		this.position.add(this.velocity.copy().scale(delta));
+		
+		float l = this.velocity.length();
+		
+		if (l < MAX_SPEED * 0.25f) {
+			
+			this.animationTilt.setCurrentFrame(0);
+		}
+		else if (l < MAX_SPEED * 0.9f) {
+			
+			this.animationTilt.setCurrentFrame(1);
+		}
+		else {
+			
+			this.animationTilt.setCurrentFrame(2);
+		}
+		
+		this.velocity.scale(DRAG_FACTOR);
 	}
 	
 	public void render(GameContainer gameContainer, Graphics graphics) {

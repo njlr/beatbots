@@ -14,6 +14,10 @@ public strictfp class BeatBotOne extends BeatBot {
 	
 	private Image image;
 	
+	private boolean isGoingRight;
+	
+	private int hops;
+	
 	@Override
 	public Vector2f getPosition() {
 		
@@ -42,6 +46,10 @@ public strictfp class BeatBotOne extends BeatBot {
 		
 		this.position.set(this.startPosition);
 		
+		this.isGoingRight = true;
+		
+		this.hops = 0;
+		
 		this.image = new Image("assets/BeatBot1Frame1.png");
 	}
 	
@@ -49,8 +57,6 @@ public strictfp class BeatBotOne extends BeatBot {
 	public strictfp void update(GameContainer gameContainer, int delta) {
 		
 		super.update(gameContainer, delta);
-		
-		this.position.y += 0.001f * delta;
 	}
 	
 	@Override
@@ -63,5 +69,33 @@ public strictfp class BeatBotOne extends BeatBot {
 				this.position.getX() - this.image.getWidth() / 2, 
 				this.position.getY() - this.image.getHeight() / 2, 
 				this.getBeatColor());
+	}
+	
+	@Override
+	public strictfp void beat() {
+		
+		super.beat();
+		
+		this.hops++;
+		
+		if (this.hops == 3) {
+			
+			this.hops = 0;
+			
+			this.position.y += 32f;
+			
+			this.isGoingRight = !this.isGoingRight;
+		}
+		else {
+			
+			if (this.isGoingRight) {
+				
+				this.position.x += 32f;
+			}
+			else {
+				
+				this.position.x -= 32f;
+			}
+		}
 	}
 }

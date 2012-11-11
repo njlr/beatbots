@@ -20,6 +20,10 @@ public strictfp final class BeatQueue {
 	public void init(GameContainer gameContainer) {
 		
 		this.beats.clear();
+		
+		this.beats.add(Beat.Red);
+		this.beats.add(Beat.Green);
+		this.beats.add(Beat.Blue);
 	}
 	
 	public void update(GameContainer gameContainer, int delta) {
@@ -29,7 +33,21 @@ public strictfp final class BeatQueue {
 	
 	public void render(GameContainer gameContainer, Graphics graphics) {
 		
+		int x = 640 - 32;
+		int y = 480 - 64;
 		
+		for (Beat i : this.beats) {
+			
+			graphics.setColor(Utils.getBeatColor(i));
+			
+			graphics.fillRect(x, y, 24, 24);
+			
+			y -= 32;
+		}
+		
+		graphics.setColor(Utils.getBeatColor(Beat.None));
+		
+		graphics.fillRect(x, y, 24, 24);
 	}
 	
 	public void storeBeat(Beat beat) {

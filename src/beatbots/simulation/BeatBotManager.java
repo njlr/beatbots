@@ -103,6 +103,8 @@ public strictfp final class BeatBotManager {
 			
 			beatBotOne.init(gameContainer);
 			
+			System.out.println("Spawned a 'None' type bot. ");
+			
 			break;
 		}
 	}
