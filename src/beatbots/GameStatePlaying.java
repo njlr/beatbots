@@ -3,7 +3,6 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -42,15 +41,12 @@ public strictfp final class GameStatePlaying extends BasicGameState {
 		BulletManager.init(this.entityManager);
 		
 		Metronome metronome = new Metronome();
-		
-		this.entityManager.addEntity(metronome);
-		
 		SequenceManager sequenceManager = new SequenceManager(metronome);
 		
+		this.entityManager.addEntity(metronome);
 		this.entityManager.addEntity(sequenceManager);
+		this.entityManager.addEntity(new WaveManager(metronome, this.entityManager, "assets/maps/Test.tmx"));
 		this.entityManager.addEntity(new Ship(sequenceManager));
-		this.entityManager.addEntity(new BeatBot(new Vector2f(128f, 128f)));
-		this.entityManager.addEntity(new BeatBotColored(new Vector2f(160f, 128f), this.entityManager, Beat.Red));
 		
 		this.entityManager.init(gameContainer);
 	}

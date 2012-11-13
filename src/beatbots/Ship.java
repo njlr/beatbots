@@ -13,7 +13,7 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 	
 	private static final float THRUST = 0.02f;
 	private static final float DRAG_FACTOR = 1f - 0.1f;
-	private static final float MAX_SPEED = 0.1f;
+	private static final float MAX_SPEED = 0.25f;
 	private static final float MAX_SPEED_SQUARED = MAX_SPEED * MAX_SPEED;
 	
 	private static final int TIME_BETWEEN_SHOTS = 100;
@@ -35,6 +35,8 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 	private int timeTillCanShoot;
 	
 	private Animation animation;
+	
+	private Input input;
 	
 	@Override
 	public boolean isActive() {
@@ -85,7 +87,9 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 		
 		this.timeTillCanShoot = 0;
 		
-		gameContainer.getInput().addKeyListener(this);
+		this.input = gameContainer.getInput();
+		
+		this.input.addKeyListener(this);
 		
 		this.animation = new Animation(new SpriteSheet("assets/Ship.png", 16, 16), 1);
 		
@@ -166,6 +170,7 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 	@Override
 	public void onDestroy() {
 		
+		this.input.removeKeyListener(this);
 	}
 	
 	@Override
@@ -173,7 +178,7 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 		
 		if (other instanceof BeatBot) {
 			
-			// TODO: Die, lose points, etc.
+			// TODO: Die, lose points or whatever.
 		}
 		else if (other instanceof BeatToken) {
 			
@@ -200,6 +205,14 @@ public strictfp final class Ship implements Entity, Collider, KeyListener {
 	@Override
 	public void setInput(Input input) {
 		
+		if (input != this.input) {
+			
+			this.input.removeKeyListener(this);
+		
+			this.input = input;
+			
+			this.input.addKeyListener(this);
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class SequenceManager implements Entity, MetronomeListener {
 	
@@ -10,6 +11,9 @@ public class SequenceManager implements Entity, MetronomeListener {
 	
 	private Sequence current;
 	private Sequence previous;
+	
+	private Sound soundRed;
+	private Sound soundBlue;
 
 	@Override
 	public boolean isActive() {
@@ -35,6 +39,9 @@ public class SequenceManager implements Entity, MetronomeListener {
 
 	@Override
 	public void init(GameContainer gameContainer) throws SlickException {
+		
+		this.soundRed = new Sound("assets/sfx/Red.wav");
+		this.soundBlue = new Sound("assets/sfx/Blue.wav");
 		
 		this.metronome.addListener(this);
 	}
@@ -102,7 +109,20 @@ public class SequenceManager implements Entity, MetronomeListener {
 	@Override
 	public void beat(int beatCount) {
 		
-		// TODO: Play beat from playback!
+		switch (this.previous.playback(beatCount)) {
+		
+		case Red:
+			
+			this.soundRed.play();
+			
+			break;
+		
+		case Blue: 
+			
+			this.soundBlue.play();
+			
+			break;
+		}
 	}
 
 	@Override

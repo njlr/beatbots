@@ -7,6 +7,8 @@ import org.newdawn.slick.geom.Vector2f;
 
 public strictfp class BeatBot implements Entity, Collider {
 	
+	private static final float SPEED = 0.01f;
+	
 	private Vector2f startingPosition;
 	
 	private boolean isActive;
@@ -14,7 +16,7 @@ public strictfp class BeatBot implements Entity, Collider {
 	private float radius;
 	
 	private Vector2f position;
-	private Vector2f velocity;
+	// private Vector2f velocity;
 	
 	@Override
 	public boolean isActive() {
@@ -47,7 +49,7 @@ public strictfp class BeatBot implements Entity, Collider {
 		this.radius = 16f;
 		
 		this.position = new Vector2f();
-		this.velocity = new Vector2f();
+		// this.velocity = new Vector2f();
 	}
 
 	@Override
@@ -61,6 +63,7 @@ public strictfp class BeatBot implements Entity, Collider {
 	@Override
 	public void update(GameContainer gameContainer, int delta) {
 		
+		this.position.y += SPEED * delta;
 	}
 
 	@Override

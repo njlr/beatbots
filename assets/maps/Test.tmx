@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="200" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="20" height="10" tilewidth="32" tileheight="32">
  <tileset firstgid="1" source="../tiles/Beats.tsx"/>
  <tileset firstgid="9" source="../tiles/Beats.tsx"/>
- <layer name="Background" width="20" height="200">
+ <layer name="Background" width="20" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3DQQ0AAAwDoXvWv+IJGSSsmqqqqqqqqqqqqqqqqqqqqu8fQrvJ4YA+AAA=
+   H4sIAAAAAAAAAxNgYGAQGMWjeBRjxQA9+gzvIAMAAA==
   </data>
  </layer>
- <layer name="Meta" width="20" height="200">
+ <layer name="Meta" width="20" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3SQQrDIBAFULeJJr3/bbtJYJiOptBV4T0okTSOX53WAAAAAAAAAAAAAAAAAPgnrx9/2Rb+2x/m9mL8bb7zeh7Xs1p3FPWONC+PV2s95Yv7iRlivpG+reqNts6zOoss38EWvs3ntrXP2rP9nq2uW53FWNTraV7VM/HdmcazfPkMc9787j6PWb1Zr1R5V/t9uoPVXfSi3qxXepE15r33XuXbw/q5b+Pc3MtVPYA3ObCE5YA+AAA=
+   H4sIAAAAAAAAA+NnYGDgH8WjeAAxJ5TmphIfWYxSPgAPCcv9IAMAAA==
   </data>
  </layer>
 </map>

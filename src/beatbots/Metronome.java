@@ -6,6 +6,7 @@ import java.util.Set;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public strictfp final class Metronome implements Entity {
 	
@@ -14,10 +15,12 @@ public strictfp final class Metronome implements Entity {
 	private static final int TIME_BETWEEN_BEATS = 1000;
 	
 	private int timeTillBeat;
-	
 	private int beatCount;
 	
 	private Set<MetronomeListener> listeners;
+	
+	private Sound soundBeat;
+	private Sound soundBar;
 
 	@Override
 	public boolean isActive() {
@@ -35,6 +38,13 @@ public strictfp final class Metronome implements Entity {
 		
 		return this.beatCount;
 	}
+	
+	public Metronome() {
+		
+		super();
+		
+		this.listeners = new HashSet<MetronomeListener>();
+	}
 
 	@Override
 	public void init(GameContainer gameContainer) throws SlickException {
@@ -43,7 +53,9 @@ public strictfp final class Metronome implements Entity {
 		
 		this.beatCount = 0;
 		
-		this.listeners = new HashSet<MetronomeListener>();
+		this.soundBeat = new Sound("assets/sfx/Beat.wav");
+		
+		this.soundBar = new Sound("assets/sfx/Bar.wav");
 	}
 
 	@Override
@@ -97,6 +109,10 @@ public strictfp final class Metronome implements Entity {
 			
 			this.bar();
 		}
+		else {
+			
+			this.soundBeat.play();
+		}
 	}
 	
 	private void bar() {
@@ -105,6 +121,8 @@ public strictfp final class Metronome implements Entity {
 			
 			i.bar();
 		}
+		
+		this.soundBar.play();
 		
 		this.beatCount = 0;
 	}
