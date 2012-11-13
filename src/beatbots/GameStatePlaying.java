@@ -3,90 +3,68 @@ package beatbots;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import beatbots.simulation.BeatBotManager;
-import beatbots.simulation.BeatMachine;
-import beatbots.simulation.BeatQueue;
-import beatbots.simulation.BeatTokenManager;
-import beatbots.simulation.BulletManager;
-import beatbots.simulation.Ship;
-
-public class GameStatePlaying extends BasicGameState {
+public strictfp final class GameStatePlaying extends BasicGameState {
 	
-	private BeatMachine beatMachine;
+	public static final int ID = 0;
 	
-	private BeatQueue beatQueue;
+	private EntityManager entityManager;
 	
-	private BeatTokenManager beatTokenManager;
-	
-	private BulletManager bulletManager;
-	
-	private BeatBotManager beatBotManager;
-	
-	private Ship ship;
-
 	public GameStatePlaying() {
 		
 		super();
 		
-		this.beatMachine = new BeatMachine();
-		this.beatQueue = new BeatQueue();
-		
-		this.bulletManager = new BulletManager();
-		
-		this.ship = new Ship(this.beatQueue, this.bulletManager);
-		
-		this.beatTokenManager = new BeatTokenManager(this.ship);
-		
-		this.beatBotManager = new BeatBotManager(this.beatMachine, this.bulletManager, this.beatTokenManager, "assets/maps/Test.tmx");
+		this.entityManager = new EntityManager();
 	}
 	
 	@Override
-	public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
 		
-		this.beatMachine.init(gameContainer);
+		super.enter(container, game);
 		
-		this.beatQueue.init(gameContainer);
 		
-		this.beatTokenManager.init(gameContainer);
+	}
+	
+	@Override
+	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
 		
-		this.bulletManager.init(gameContainer);
+		super.leave(container, game);
 		
-		this.beatBotManager.init(gameContainer);
 		
-		this.ship.init(gameContainer);
 	}
 
 	@Override
+	public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+		
+		BulletManager.init(this.entityManager);
+		
+		Metronome metronome = new Metronome();
+		
+		this.entityManager.addEntity(metronome);
+		
+		SequenceManager sequenceManager = new SequenceManager(metronome);
+		
+		this.entityManager.addEntity(sequenceManager);
+		this.entityManager.addEntity(new Ship(sequenceManager));
+		this.entityManager.addEntity(new BeatBot(new Vector2f(128f, 128f)));
+		this.entityManager.addEntity(new BeatBotColored(new Vector2f(160f, 128f), this.entityManager, Beat.Red));
+		
+		this.entityManager.init(gameContainer);
+	}
+	
+	@Override
 	public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 		
-		this.beatMachine.update(gameContainer, delta);
-		
-		this.beatQueue.update(gameContainer, delta);
-		
-		this.beatTokenManager.update(gameContainer, delta);
-		
-		this.bulletManager.update(gameContainer, delta);
-		
-		this.beatBotManager.update(gameContainer, delta);
-		
-		this.ship.update(gameContainer, delta);
+		this.entityManager.update(gameContainer, delta);
 	}
 	
 	@Override
 	public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 		
-		this.bulletManager.render(gameContainer, graphics);
-		
-		this.beatTokenManager.render(gameContainer, graphics);
-		
-		this.beatQueue.render(gameContainer, graphics);
-		
-		this.beatBotManager.render(gameContainer, graphics);
-		
-		this.ship.render(gameContainer, graphics);
+		this.entityManager.render(gameContainer, graphics);
 	}
 
 	@Override
@@ -94,6 +72,4 @@ public class GameStatePlaying extends BasicGameState {
 		
 		return ID;
 	}
-	
-	public static final int ID = 0;
 }
