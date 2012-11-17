@@ -34,7 +34,7 @@
     <property name="Successor" value="Node04"/>
    </properties>
   </object>
-  <object name="RedColorizer" type="Node" x="246" y="235" width="32" height="32">
+  <object name="Red" type="Colorizer" x="246" y="235" width="32" height="32">
    <properties>
     <property name="Color" value="0"/>
    </properties>
