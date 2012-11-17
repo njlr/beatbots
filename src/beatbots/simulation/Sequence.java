@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -99,10 +100,10 @@ public class Sequence implements Entity, MetronomeListener {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		int x = 0;
+		int x = 32 * 5;
 		int y = 4;
 		
-		for (int i = this.metronome.getBeatCount(); i < Math.min(this.sequence.size(), this.metronome.getBeatCount() + 20); i++) {
+		for (int i = this.metronome.getBeatCount(); i < Math.min(this.sequence.size(), this.metronome.getBeatCount() + 10); i++) {
 			
 			graphics.setColor(Utils.getColor(this.sequence.get(i)));
 			
@@ -110,13 +111,15 @@ public class Sequence implements Entity, MetronomeListener {
 			
 			if (i == this.metronome.getBeatCount()) {
 				
-				graphics.fillRect(x + 4, y + 4, 20, 20);
+				graphics.fillRect(x + 4, y + 4, 21, 21);
 			}
 			
 			x += 32;
 		}
 		
-		graphics.drawString(Integer.toString(this.getScore()) + "%", 4, 32);
+		graphics.setColor(Color.white);
+		
+		graphics.drawString("SCORE: " + Integer.toString(this.getScore()) + "%", 4, 4);
 	}
 
 	@Override
