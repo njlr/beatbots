@@ -1,8 +1,5 @@
 package beatbots.simulation;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,8 +13,6 @@ public class Speaker implements Entity, MetronomeListener {
 	private Node node;
 	
 	private boolean isActive;
-	
-	private Queue<NoteColor> noteColor; 
 	
 	private Sound soundRed;
 	private Sound soundBlue;
@@ -38,16 +33,12 @@ public class Speaker implements Entity, MetronomeListener {
 		
 		this.metronome = metronome;
 		this.node = node;
-		
-		this.noteColor = new ConcurrentLinkedQueue<NoteColor>();
 	}
 	
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		
 		this.isActive = true;
-		
-		this.noteColor.clear();
 		
 		this.soundRed = new Sound("assets/sfx/Red.wav");
 		this.soundBlue = new Sound("assets/sfx/Blue.wav");
@@ -62,14 +53,7 @@ public class Speaker implements Entity, MetronomeListener {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		if (this.node.isActive()) {
-			
-			while (!this.node.getNotes().isEmpty()) {
-				
-				this.noteColor.add(this.node.getNotes().remove().getNoteColor());
-			}
-		}
-		else {
+		if (!this.node.isActive()) {
 			
 			this.deactivate();
 		}
@@ -97,16 +81,14 @@ public class Speaker implements Entity, MetronomeListener {
 	public void destroy(GameContainer gameContainer) {
 		
 		this.metronome.removeListener(this);
-		
-		this.noteColor.clear();
 	}
 	
 	@Override
 	public void beat(int beatCount) {
 		
-		if (!this.noteColor.isEmpty()) {
+		if (!this.node.getNotes().isEmpty()) {
 			
-			switch (this.noteColor.remove()) {
+			switch (this.node.getNotes().remove().getNoteColor()) {
 			
 			case Red: 
 				

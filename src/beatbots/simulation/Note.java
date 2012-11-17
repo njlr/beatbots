@@ -83,7 +83,52 @@ public class Note implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		graphics.setColor(Color.white);
+		
+		
+		switch (this.noteColor) {
+		
+		case Red:
+			
+			graphics.setColor(Color.red);
+			
+			break;
+			
+		case Blue:
+			
+			graphics.setColor(Color.cyan);
+			
+			break;
+			
+		case Yellow:
+			
+			graphics.setColor(Color.yellow);
+			
+			break;
+			
+		case Magenta:
+			
+			graphics.setColor(Color.magenta);
+			
+			break;
+			
+		case Orange:
+			
+			graphics.setColor(Color.orange);
+			
+			break;
+			
+		case Green:
+			
+			graphics.setColor(Color.green);
+			
+			break;
+
+		default:
+			
+			graphics.setColor(Color.white);
+			
+			break;
+		}
 		
 		graphics.drawRect(
 				this.position.x - 2f,  
