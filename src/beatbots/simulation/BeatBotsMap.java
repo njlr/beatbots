@@ -12,6 +12,8 @@ import org.newdawn.slick.tiled.TiledMap;
 public class BeatBotsMap implements Entity {
 	
 	private EntityManager entityManager;
+	private Metronome metronome;
+	
 	private String mapReference;
 	
 	private boolean isActive;
@@ -22,11 +24,13 @@ public class BeatBotsMap implements Entity {
 		return this.isActive;
 	}
 	
-	public BeatBotsMap(EntityManager entityManager, String mapReference) {
+	public BeatBotsMap(EntityManager entityManager, Metronome metronome, String mapReference) {
 		
 		super();
 		
 		this.entityManager = entityManager;
+		this.metronome = metronome;
+		
 		this.mapReference = mapReference;
 	}
 
@@ -51,7 +55,7 @@ public class BeatBotsMap implements Entity {
 					
 					String type = tiledMap.getObjectType(g, i);
 					
-					if (type.equals("Node")) {
+					if (type.equals("Node") || type.equals("Generator")) {
 						
 						String name = tiledMap.getObjectName(g, i);
 						
@@ -64,7 +68,14 @@ public class BeatBotsMap implements Entity {
 							
 							if (successor.equals("")) {
 								
-								nodes.put(name, new Node(new Vector2f(x, y)));
+								if (type.equals("Node")) {
+									
+									nodes.put(name, new Node(new Vector2f(x, y)));
+								}
+								else if (type.equals("Generator")) {
+									
+									nodes.put(name, new Generator(new Vector2f(x, y), this.entityManager, this.metronome));
+								}
 								
 								change = true;
 							}
@@ -72,8 +83,14 @@ public class BeatBotsMap implements Entity {
 								
 								if (nodes.containsKey(successor)) {
 									
-									nodes.put(name, new Node(new Vector2f(x, y), nodes.get(successor)));
-									
+									if (type.equals("Node")) {
+										
+										nodes.put(name, new Node(new Vector2f(x, y), nodes.get(successor)));
+									}
+									else if (type.equals("Generator")) {
+										
+										nodes.put(name, new Generator(new Vector2f(x, y), nodes.get(successor), this.entityManager, this.metronome));
+									}
 									change = true;
 								}
 							}

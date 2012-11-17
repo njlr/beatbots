@@ -8,6 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import beatbots.simulation.BeatBotsMap;
 import beatbots.simulation.EntityManager;
+import beatbots.simulation.Metronome;
 
 
 public strictfp final class GameStatePlaying extends BasicGameState {
@@ -22,7 +23,11 @@ public strictfp final class GameStatePlaying extends BasicGameState {
 		
 		this.entityManager = new EntityManager();
 		
-		this.entityManager.addEntity(new BeatBotsMap(this.entityManager, "assets/maps/Test.tmx"));
+		Metronome metronome = new Metronome();
+		BeatBotsMap beatBotsMap = new BeatBotsMap(this.entityManager, metronome, "assets/maps/Test.tmx");
+		
+		this.entityManager.addEntity(metronome);
+		this.entityManager.addEntity(beatBotsMap);
 	}
 
 	@Override
