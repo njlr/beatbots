@@ -14,7 +14,7 @@ public class Note implements Entity {
 	private boolean isActive;
 	
 	private Vector2f position;
-	private Vector2f velocity;
+	private Vector2f direction;
 	
 	private Node target;
 	
@@ -36,7 +36,7 @@ public class Note implements Entity {
 		this.startingNode = startingNode;
 		
 		this.position = new Vector2f();
-		this.velocity = new Vector2f();
+		this.direction = new Vector2f();
 		
 		this.target = null;
 	}
@@ -52,7 +52,7 @@ public class Note implements Entity {
 		
 		if (this.target != null) {
 			
-			this.setVelocityToTarget();
+			this.setDirection();
 		}
 	}
 	
@@ -65,19 +65,7 @@ public class Note implements Entity {
 		}
 		else {
 			
-			this.position.add(this.velocity.copy().scale(delta));
-			
-			if (this.position.distanceSquared(this.target.getPosition()) < NOTE_SPEED * NOTE_SPEED) {
-				
-				this.position.set(this.target.getPosition());
-				
-				this.target = this.target.getSuccessor();
-				
-				if (this.target != null) {
-					
-					this.setVelocityToTarget();
-				}
-			}
+			this.move(NOTE_SPEED * delta);
 		}
 	}
 
@@ -104,8 +92,31 @@ public class Note implements Entity {
 		
 	}
 	
-	private void setVelocityToTarget() {
+	private void setDirection() {
 		
-		this.velocity.set(this.target.getPosition().copy().sub(this.position).normalise().scale(NOTE_SPEED));
+		this.direction.set(this.target.getPosition().copy().sub(this.position).normalise());
+	}
+	
+	private void move(float distanceToMove) {
+		
+		if (this.position.distanceSquared(this.target.getPosition()) > Math.pow(distanceToMove, 2)) {
+			
+			this.position.add(this.direction.copy().scale(distanceToMove));
+		}
+		else {
+			
+			float overflow = distanceToMove - this.position.distance(this.target.getPosition());
+			
+			this.position.set(this.target.getPosition());
+			
+			this.target = this.target.getSuccessor();
+			
+			if (this.target != null) {
+				
+				this.setDirection();
+				
+				this.move(overflow);
+			}
+		}
 	}
 }
