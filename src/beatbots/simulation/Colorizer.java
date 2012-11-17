@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Colorizer implements Entity {
 	
-	private static final float RADIUS = 16f;
+	private static final float RADIUS = 8f;
 	private static final float RADIUS_SQUARED = RADIUS * RADIUS;
 	
 	private EntityManager entityManager;
