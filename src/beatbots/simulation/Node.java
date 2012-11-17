@@ -75,15 +75,15 @@ public class Node implements Entity {
 				28f, 
 				28f);
 		
-		if (this.successor != null) {
+		if (this.getSuccessor() != null) {
 			
 			graphics.setColor(Color.yellow);
 			
 			graphics.drawLine(
 					this.position.x, 
 					this.position.y, 
-					this.successor.getPosition().getX(), 
-					this.successor.getPosition().getY());
+					this.getSuccessor().getPosition().getX(), 
+					this.getSuccessor().getPosition().getY());
 		}
 	}
 

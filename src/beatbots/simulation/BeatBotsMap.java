@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.tiled.TiledMap;
 
-public class BeatBotsMap implements Entity {
+public strictfp final class BeatBotsMap implements Entity {
 	
 	private EntityManager entityManager;
 	private Metronome metronome;
@@ -41,6 +41,7 @@ public class BeatBotsMap implements Entity {
 		
 		TiledMap tiledMap = new TiledMap(this.mapReference);
 		
+		// Create the nodes
 		boolean change = true;
 		
 		Map<String, Node> nodes = new HashMap<String, Node>();
@@ -102,21 +103,27 @@ public class BeatBotsMap implements Entity {
 							}
 						}
 					}
-					else if (type.equals("Colorizer")) {
+					else if (type.equals("Switch")) {
 						
-						int c = Integer.parseInt(tiledMap.getObjectProperty(g, i, "Color", "0"));
+						String name = tiledMap.getObjectName(g, i);
 						
-						float x = tiledMap.getObjectX(g, i);
-						float y = tiledMap.getObjectY(g, i);
-						
-						this.entityManager.addEntity(new Colorizer(this.entityManager, Utils.getNoteColor(c), new Vector2f(x, y)));
-					}
-					else if (type.equals("Alternator")) {
-						
-						float x = tiledMap.getObjectX(g, i);
-						float y = tiledMap.getObjectY(g, i);
-						
-						this.entityManager.addEntity(new Alternator(this.entityManager, new Vector2f(x, y)));
+						if (!nodes.containsKey(name)) {
+							
+							String successorA = tiledMap.getObjectProperty(g, i, "SuccessorA", "");
+							String successorB = tiledMap.getObjectProperty(g, i, "SuccessorB", "");
+							
+							if (nodes.containsKey(successorA) && nodes.containsKey(successorB)) {
+								
+								float x = tiledMap.getObjectX(g, i);
+								float y = tiledMap.getObjectY(g, i);
+								
+								Switch switchNode = new Switch(new Vector2f(x, y), nodes.get(successorA), nodes.get(successorB));
+								
+								nodes.put(name, switchNode);
+								
+								change = true;
+							}
+						}
 					}
 				}
 			}
@@ -125,6 +132,32 @@ public class BeatBotsMap implements Entity {
 		for (Node node : nodes.values()) {
 			
 			this.entityManager.addEntity(node);
+		}
+		
+		// Create the rest
+		for (int g = 0; g < tiledMap.getObjectGroupCount(); g++) {
+			
+			for (int i = 0; i < tiledMap.getObjectCount(g); i++) {
+				
+				String type = tiledMap.getObjectType(g, i);
+				
+				if (type.equals("Colorizer")) {
+					
+					int c = Integer.parseInt(tiledMap.getObjectProperty(g, i, "Color", "0"));
+					
+					float x = tiledMap.getObjectX(g, i);
+					float y = tiledMap.getObjectY(g, i);
+					
+					this.entityManager.addEntity(new Colorizer(this.entityManager, Utils.getNoteColor(c), new Vector2f(x, y)));
+				}
+				else if (type.equals("Alternator")) {
+					
+					float x = tiledMap.getObjectX(g, i);
+					float y = tiledMap.getObjectY(g, i);
+					
+					this.entityManager.addEntity(new Alternator(this.entityManager, new Vector2f(x, y)));
+				}
+			}
 		}
 	}
 
