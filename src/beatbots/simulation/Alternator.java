@@ -1,5 +1,8 @@
 package beatbots.simulation;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -17,7 +20,7 @@ public class Alternator implements Entity {
 	
 	private boolean isActive;
 	
-	private Note currentNote;
+	private Set<Note> notesSeen;
 	
 	private boolean shouldDestroyNext;
 	
@@ -34,6 +37,8 @@ public class Alternator implements Entity {
 		this.entityManager = entityManager;
 		
 		this.position = position;
+		
+		this.notesSeen = new HashSet<Note>();
 	}
 
 	@Override
@@ -41,7 +46,7 @@ public class Alternator implements Entity {
 		
 		this.isActive = true;
 		
-		this.currentNote = null;
+		this.notesSeen.clear();
 		
 		this.shouldDestroyNext = true;
 	}
@@ -55,9 +60,9 @@ public class Alternator implements Entity {
 				
 				Note note = (Note) i;
 				
-				if (note != this.currentNote) {
-					
-					if (this.position.distanceSquared(note.getPosition()) < RADIUS_SQUARED) {
+				if (this.position.distanceSquared(note.getPosition()) < RADIUS_SQUARED) {
+				
+					if (!this.notesSeen.contains(note)) {
 						
 						if (this.shouldDestroyNext) {
 							
@@ -66,7 +71,14 @@ public class Alternator implements Entity {
 						
 						this.shouldDestroyNext = !this.shouldDestroyNext;
 						
-						this.currentNote = note;
+						this.notesSeen.add(note);
+					}
+				}
+				else {
+					
+					if (this.notesSeen.contains(note)) {
+						
+						this.notesSeen.remove(note);
 					}
 				}
 			}
@@ -76,7 +88,14 @@ public class Alternator implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		graphics.setColor(Color.white);
+		if (this.shouldDestroyNext) {
+			
+			graphics.setColor(Color.white);
+		}
+		else {
+			
+			graphics.setColor(Color.gray);
+		}
 		
 		graphics.drawOval(
 				this.position.getX() - RADIUS, 
