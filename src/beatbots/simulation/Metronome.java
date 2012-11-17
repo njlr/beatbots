@@ -13,7 +13,7 @@ public strictfp final class Metronome implements Entity {
 	
 	public static final int BEATS_PER_BAR = 8;
 	
-	private static final int TIME_BETWEEN_BEATS = 800;
+	private static final int TIME_BETWEEN_BEATS = 3000;
 	
 	private int timeTillBeat;
 	private int beatCount;
