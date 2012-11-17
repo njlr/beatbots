@@ -19,7 +19,7 @@
     <property name="Successor" value="Node03"/>
    </properties>
   </object>
-  <object name="Node04" type="Speaker" x="543" y="214" width="32" height="32">
+  <object name="Node05" type="Speaker" x="543" y="214" width="32" height="32">
    <properties>
     <property name="Successor" value=""/>
    </properties>
@@ -34,7 +34,7 @@
     <property name="Successor" value="Node04"/>
    </properties>
   </object>
-  <object name="Red" type="Colorizer" x="408" y="224" width="32" height="32">
+  <object name="Red" type="Colorizer" x="405" y="230" width="32" height="32">
    <properties>
     <property name="Color" value="0"/>
    </properties>
