@@ -69,7 +69,7 @@ public class Note implements Entity {
 			this.setDirection();
 		}
 		
-		this.noteColor = NoteColor.Red;
+		this.noteColor = NoteColor.White;
 	}
 	
 	@Override
