@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Alternator implements Entity {
+public strictfp final class Alternator implements Entity {
 	
 	private static final float RADIUS = 16f;
 	private static final float RADIUS_SQUARED = RADIUS * RADIUS;
