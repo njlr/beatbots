@@ -11,37 +11,43 @@
  <objectgroup color="#55ff00" name="Nodes" width="20" height="15">
   <object name="Node01" type="Generator" x="47" y="213" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node02"/>
+    <property name="Successor" value="Switch01"/>
    </properties>
   </object>
-  <object name="Node02" type="Node" x="153" y="283" width="32" height="32">
+  <object name="Switch01" type="Node" x="165" y="213" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node03"/>
+    <property name="SuccessorA" value="Node03"/>
+    <property name="SuccessorB" value="Node04"/>
    </properties>
   </object>
-  <object name="Node05" type="Speaker" x="543" y="214" width="32" height="32">
+  <object name="Node05" type="Speaker" x="541" y="204" width="32" height="32">
    <properties>
     <property name="Successor" value=""/>
    </properties>
   </object>
-  <object name="Node04" type="Node" x="460" y="290" width="32" height="32">
+  <object name="Node04" type="Node" x="316" y="341" width="32" height="32">
    <properties>
     <property name="Successor" value="Node05"/>
    </properties>
   </object>
-  <object name="Node03" type="Node" x="341" y="165" width="32" height="32">
+  <object name="Node03" type="Node" x="315" y="88" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node04"/>
+    <property name="Successor" value="Node05"/>
    </properties>
   </object>
-  <object name="Red" type="Colorizer" x="405" y="230" width="32" height="32">
+  <object name="Red" type="Colorizer" x="236" y="151" width="32" height="32">
    <properties>
     <property name="Color" value="0"/>
    </properties>
   </object>
-  <object name="Alternator" type="Alternator" x="241" y="226" width="32" height="32">
+  <object name="Alternator" type="Alternator" x="415" y="287" width="32" height="32">
    <properties>
     <property name="" value=""/>
+   </properties>
+  </object>
+  <object name="Blue" type="Colorizer" x="236" y="282" width="32" height="32">
+   <properties>
+    <property name="Color" value="1"/>
    </properties>
   </object>
  </objectgroup>
