@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Background" tilewidth="32" tileheight="32">
+  <image source="../Background.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Background" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NkYGBgHMWjeBSP4iGAATEAE1WwBAAA
+  </data>
+ </layer>
+ <objectgroup name="Nodes" width="20" height="15">
+  <object name="Node01" type="Generator" x="14" y="116" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Switch01"/>
+   </properties>
+  </object>
+  <object name="Switch01" type="Switch" x="66" y="169" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node02"/>
+    <property name="SuccessorB" value="Switch02"/>
+   </properties>
+  </object>
+  <object name="Node02" type="Node" x="177" y="50" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node03"/>
+   </properties>
+  </object>
+  <object name="Switch02" type="Switch" x="122" y="226" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node03"/>
+    <property name="SuccessorB" value="Switch03"/>
+   </properties>
+  </object>
+  <object name="Node03" type="Node" x="231" y="96" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node04"/>
+   </properties>
+  </object>
+  <object name="Node04" type="Node" x="301" y="160" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node05"/>
+   </properties>
+  </object>
+  <object name="Switch03" type="Switch" x="179" y="279" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node04"/>
+    <property name="SuccessorB" value="Switch04"/>
+   </properties>
+  </object>
+  <object name="Node05" type="Node" x="364" y="222" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node06"/>
+   </properties>
+  </object>
+  <object name="Red" type="Colorizer" x="115" y="112" width="32" height="32">
+   <properties>
+    <property name="Color" value="0"/>
+   </properties>
+  </object>
+  <object name="Blue" type="Colorizer" x="240" y="223" width="32" height="32">
+   <properties>
+    <property name="Color" value="1"/>
+   </properties>
+  </object>
+  <object name="Yellow" type="Colorizer" x="372" y="354" width="32" height="32">
+   <properties>
+    <property name="Color" value="2"/>
+   </properties>
+  </object>
+  <object name="Switch04" type="Switch" x="243" y="343" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node05"/>
+    <property name="SuccessorB" value="Switch05"/>
+   </properties>
+  </object>
+  <object name="Switch05" type="Switch" x="313" y="413" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node06"/>
+    <property name="SuccessorB" value="Node07"/>
+   </properties>
+  </object>
+  <object name="Purple" type="Colorizer" x="178" y="163" width="32" height="32">
+   <properties>
+    <property name="Color" value="3"/>
+   </properties>
+  </object>
+  <object name="Green" type="Colorizer" x="306" y="279" width="32" height="32">
+   <properties>
+    <property name="Color" value="5"/>
+   </properties>
+  </object>
+  <object name="Node06" type="Node" x="432" y="292" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node07"/>
+   </properties>
+  </object>
+  <object name="Node07" type="Node" x="546" y="405" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node08"/>
+   </properties>
+  </object>
+  <object name="Node08" type="Speaker" x="539" y="59" width="32" height="32">
+   <properties>
+    <property name="" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
