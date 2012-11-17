@@ -14,7 +14,7 @@
     <property name="Successor" value="Switch01"/>
    </properties>
   </object>
-  <object name="Switch01" type="Node" x="165" y="213" width="32" height="32">
+  <object name="Switch01" type="Switch" x="165" y="213" width="32" height="32">
    <properties>
     <property name="SuccessorA" value="Node03"/>
     <property name="SuccessorB" value="Node04"/>
