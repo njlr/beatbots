@@ -3,55 +3,77 @@ package beatbots.simulation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.SlickException;
 
-public class Generator extends Node implements MetronomeListener {
+
+public class Generator implements Entity, MetronomeListener {
 	
 	private EntityManager entityManager;
 	private Metronome metronome;
-
-	public Generator(Vector2f position, Node successor, EntityManager entityManager, Metronome metronome) {
+	private Node node;
+	
+	private boolean isActive;
+	
+	@Override
+	public boolean isActive() {
 		
-		super(position, successor);
-		
-		this.entityManager = entityManager;
-		this.metronome = metronome;
+		return this.isActive;
 	}
 
-	public Generator(Vector2f position, EntityManager entityManager, Metronome metronome) {
+	public Generator(EntityManager entityManager, Metronome metronome, Node node) {
 		
-		super(position);
+		super();
 		
 		this.entityManager = entityManager;
 		this.metronome = metronome;
+		this.node = node;
 	}
 	
 	@Override
 	public void init(GameContainer container) {
 		
-		super.init(container);
+		this.isActive = true;
 		
 		this.metronome.addListener(this);
 	}
 	
 	@Override
-	public void render(GameContainer container, Graphics graphics) {
+	public void update(GameContainer container, int delta) throws SlickException {
 		
-		super.render(container, graphics);
+		if (!this.node.isActive()) { 
+			
+			this.deactivate();
+		}
+	}
+	
+	@Override
+	public void render(GameContainer container, Graphics graphics) {
 		
 		graphics.setColor(Color.green);
 		
-		graphics.drawRect(
-				this.getPosition().getX() - 4f,  
-				this.getPosition().getY() - 4f, 
+		graphics.drawOval(
+				this.node.getPosition().getX() - 4f, 
+				this.node.getPosition().getY() - 4f, 
 				8f, 
 				8f);
 	}
 	
 	@Override
+	public void deactivate() {
+		
+		this.isActive = false;
+	}
+	
+	@Override
+	public void destroy(GameContainer gameContainer) {
+		
+		this.metronome.removeListener(this);
+	}
+	
+	@Override
 	public void beat(int beatCount) {
 		
-		this.entityManager.addEntity(new Note(this));
+		this.entityManager.addEntity(new Note(this.node));
 	}
 
 	@Override
