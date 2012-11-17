@@ -102,6 +102,15 @@ public class BeatBotsMap implements Entity {
 							}
 						}
 					}
+					else if (type.equals("Colorizer")) {
+						
+						int c = Integer.parseInt(tiledMap.getObjectProperty(g, i, "Color", "0"));
+						
+						float x = tiledMap.getObjectX(g, i);
+						float y = tiledMap.getObjectY(g, i);
+						
+						this.entityManager.addEntity(new Colorizer(this.entityManager, Utils.getNoteColor(c), new Vector2f(x, y)));
+					}
 				}
 			}
 		}

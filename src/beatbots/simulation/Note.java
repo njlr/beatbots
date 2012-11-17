@@ -1,9 +1,9 @@
 package beatbots.simulation;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
+
 
 public class Note implements Entity {
 	
@@ -34,6 +34,11 @@ public class Note implements Entity {
 	public NoteColor getNoteColor() {
 		
 		return this.noteColor;
+	}
+	
+	public void setNoteColor(NoteColor noteColor) {
+		
+		this.noteColor = noteColor;
 	}
 	
 	public Note(Node startingNode) {
@@ -83,52 +88,7 @@ public class Note implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		
-		
-		switch (this.noteColor) {
-		
-		case Red:
-			
-			graphics.setColor(Color.red);
-			
-			break;
-			
-		case Blue:
-			
-			graphics.setColor(Color.cyan);
-			
-			break;
-			
-		case Yellow:
-			
-			graphics.setColor(Color.yellow);
-			
-			break;
-			
-		case Magenta:
-			
-			graphics.setColor(Color.magenta);
-			
-			break;
-			
-		case Orange:
-			
-			graphics.setColor(Color.orange);
-			
-			break;
-			
-		case Green:
-			
-			graphics.setColor(Color.green);
-			
-			break;
-
-		default:
-			
-			graphics.setColor(Color.white);
-			
-			break;
-		}
+		graphics.setColor(Utils.getColor(this.noteColor));
 		
 		graphics.drawRect(
 				this.position.x - 2f,  
@@ -180,7 +140,7 @@ public class Note implements Entity {
 		}
 		else {
 			
-			float overflow = distanceToMove - this.position.distance(this.target.getPosition());
+			float overflow = distanceToMove - this.position.distance(this.target.getPosition()) - 0.01f;
 			
 			this.position.set(this.target.getPosition());
 			
