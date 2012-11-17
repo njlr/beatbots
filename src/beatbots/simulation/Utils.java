@@ -14,27 +14,27 @@ public strictfp final class Utils {
 		
 		switch (index) {
 			
-		case 1:
+		case 0:
 			
 			return NoteColor.Red;
 			
-		case 2:
+		case 1:
 			
 			return NoteColor.Blue;
 			
-		case 3:
+		case 2:
 			
 			return NoteColor.Yellow;
 			
-		case 4:
+		case 3:
 			
 			return NoteColor.Magenta;
 			
-		case 5:
+		case 4:
 			
 			return NoteColor.Orange;
 			
-		case 6: 
+		case 5: 
 			
 			return NoteColor.Green;
 			
@@ -88,6 +88,10 @@ public strictfp final class Utils {
 		else {
 			
 			switch (original) {
+			
+			case White:
+				
+				return mixin;
 			
 			case Red:
 				
