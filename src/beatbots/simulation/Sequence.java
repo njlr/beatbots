@@ -64,7 +64,7 @@ public class Sequence implements Entity, MetronomeListener {
 		
 		this.sequence.clear();
 		
-		TiledMap tiledMap = new TiledMap("assets/maps/Song0.tmx");
+		TiledMap tiledMap = new TiledMap("assets/maps/Song00.tmx");
 
 		for (int x = 0; x < tiledMap.getWidth(); x++) {
 			
