@@ -111,6 +111,13 @@ public class BeatBotsMap implements Entity {
 						
 						this.entityManager.addEntity(new Colorizer(this.entityManager, Utils.getNoteColor(c), new Vector2f(x, y)));
 					}
+					else if (type.equals("Alternator")) {
+						
+						float x = tiledMap.getObjectX(g, i);
+						float y = tiledMap.getObjectY(g, i);
+						
+						this.entityManager.addEntity(new Alternator(this.entityManager, new Vector2f(x, y)));
+					}
 				}
 			}
 		}

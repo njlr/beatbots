@@ -1,0 +1,98 @@
+package beatbots.simulation;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
+
+public class Alternator implements Entity {
+	
+	private static final float RADIUS = 16f;
+	private static final float RADIUS_SQUARED = RADIUS * RADIUS;
+	
+	private EntityManager entityManager;
+	
+	private Vector2f position;
+	
+	private boolean isActive;
+	
+	private Note currentNote;
+	
+	private boolean shouldDestroyNext;
+	
+	@Override
+	public boolean isActive() {
+		
+		return this.isActive;
+	}
+	
+	public Alternator(EntityManager entityManager, Vector2f position) {
+		
+		super();
+		
+		this.entityManager = entityManager;
+		
+		this.position = position;
+	}
+
+	@Override
+	public void init(GameContainer container) throws SlickException {
+		
+		this.isActive = true;
+		
+		this.currentNote = null;
+		
+		this.shouldDestroyNext = true;
+	}
+
+	@Override
+	public void update(GameContainer container, int delta) throws SlickException {
+		
+		for (Entity i : this.entityManager.getEntities()) {
+			
+			if (i instanceof Note) {
+				
+				Note note = (Note) i;
+				
+				if (note != this.currentNote) {
+					
+					if (this.position.distanceSquared(note.getPosition()) < RADIUS_SQUARED) {
+						
+						if (this.shouldDestroyNext) {
+							
+							note.deactivate();
+						}
+						
+						this.shouldDestroyNext = !this.shouldDestroyNext;
+						
+						this.currentNote = note;
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics graphics) {
+		
+		graphics.setColor(Color.white);
+		
+		graphics.drawOval(
+				this.position.getX() - RADIUS, 
+				this.position.getY() - RADIUS, 
+				RADIUS * 2, 
+				RADIUS * 2);
+	}
+
+	@Override
+	public void deactivate() {
+		
+		this.isActive = false;
+	}
+
+	@Override
+	public void destroy(GameContainer gameContainer) {
+		
+	}
+}
