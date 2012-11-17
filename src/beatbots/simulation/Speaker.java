@@ -4,22 +4,14 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
 
-public class Speaker implements Entity, MetronomeListener {
+public class Speaker implements Entity {
 	
-	private Metronome metronome;
+	private Sequence sequence;
 	private Node node;
 	
 	private boolean isActive;
-	
-	private Sound soundRed;
-	private Sound soundBlue;
-	private Sound soundYellow;
-	private Sound soundMagenta;
-	private Sound soundOrange;
-	private Sound soundGreen;
 	
 	@Override
 	public boolean isActive() {
@@ -27,11 +19,11 @@ public class Speaker implements Entity, MetronomeListener {
 		return this.isActive;
 	}
 
-	public Speaker(Metronome metronome, Node node) {
+	public Speaker(Sequence sequence, Node node) {
 		
 		super();
 		
-		this.metronome = metronome;
+		this.sequence = sequence;
 		this.node = node;
 	}
 	
@@ -39,21 +31,19 @@ public class Speaker implements Entity, MetronomeListener {
 	public void init(GameContainer container) throws SlickException {
 		
 		this.isActive = true;
-		
-		this.soundRed = new Sound("assets/sfx/Red.wav");
-		this.soundBlue = new Sound("assets/sfx/Blue.wav");
-		this.soundYellow = new Sound("assets/sfx/Yellow.wav");
-		this.soundMagenta = new Sound("assets/sfx/Magenta.wav");
-		this.soundOrange = new Sound("assets/sfx/Orange.wav");
-		this.soundGreen = new Sound("assets/sfx/Green.wav");
-		
-		this.metronome.addListener(this);
 	}
 	
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		if (!this.node.isActive()) {
+		if (this.node.isActive()) {
+			
+			while (!this.node.getNotes().isEmpty()) {
+				
+				this.sequence.record(this.node.getNotes().remove().getNoteColor());
+			}
+		}
+		else {
 			
 			this.deactivate();
 		}
@@ -79,58 +69,6 @@ public class Speaker implements Entity, MetronomeListener {
 	
 	@Override
 	public void destroy(GameContainer gameContainer) {
-		
-		this.metronome.removeListener(this);
-	}
-	
-	@Override
-	public void beat(int beatCount) {
-		
-		if (!this.node.getNotes().isEmpty()) {
-			
-			switch (this.node.getNotes().remove().getNoteColor()) {
-			
-			case Red: 
-				
-				this.soundRed.play();
-				
-				break;
-				
-			case Blue: 
-				
-				this.soundBlue.play();
-				
-				break;
-				
-			case Yellow: 
-				
-				this.soundYellow.play();
-				
-				break;
-				
-			case Magenta: 
-				
-				this.soundMagenta.play();
-				
-				break;
-				
-			case Orange:
-				
-				this.soundOrange.play();
-				
-				break;
-				
-			case Green:
-				
-				this.soundGreen.play();
-				
-				break;
-			}
-		}
-	}
-
-	@Override
-	public void bar() {
 		
 	}
 }
