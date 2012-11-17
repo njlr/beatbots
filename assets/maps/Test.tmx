@@ -14,7 +14,7 @@
     <property name="Successor" value="Node02"/>
    </properties>
   </object>
-  <object name="Node02" type="Node" x="218" y="102" width="32" height="32">
+  <object name="Node02" type="Node" x="153" y="283" width="32" height="32">
    <properties>
     <property name="Successor" value="Node03"/>
    </properties>
@@ -24,9 +24,19 @@
     <property name="Successor" value=""/>
    </properties>
   </object>
-  <object name="Node03" type="Node" x="359" y="100" width="32" height="32">
+  <object name="Node04" type="Node" x="460" y="290" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node05"/>
+   </properties>
+  </object>
+  <object name="Node03" type="Node" x="341" y="165" width="32" height="32">
    <properties>
     <property name="Successor" value="Node04"/>
+   </properties>
+  </object>
+  <object name="RedColorizer" type="Node" x="246" y="235" width="32" height="32">
+   <properties>
+    <property name="Color" value="0"/>
    </properties>
   </object>
  </objectgroup>
