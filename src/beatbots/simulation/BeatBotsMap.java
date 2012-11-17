@@ -55,7 +55,7 @@ public class BeatBotsMap implements Entity {
 					
 					String type = tiledMap.getObjectType(g, i);
 					
-					if (type.equals("Node") || type.equals("Generator")) {
+					if (type.equals("Node") || type.equals("Generator") || type.equals("Speaker")) {
 						
 						String name = tiledMap.getObjectName(g, i);
 						
@@ -68,31 +68,37 @@ public class BeatBotsMap implements Entity {
 							
 							if (successor.equals("")) {
 								
-								if (type.equals("Node")) {
+								Node node = new Node(new Vector2f(x, y));
+								
+								nodes.put(name, node);
+								
+								if (type.equals("Generator")) {
 									
-									nodes.put(name, new Node(new Vector2f(x, y)));
+									this.entityManager.addEntity(new Generator(this.entityManager, this.metronome, node));
 								}
-								else if (type.equals("Generator")) {
+								else if (type.equals("Speaker")) {
 									
-									nodes.put(name, new Generator(new Vector2f(x, y), this.entityManager, this.metronome));
+									this.entityManager.addEntity(new Speaker(this.metronome, node));
 								}
 								
 								change = true;
 							}
-							else {
+							else if (nodes.containsKey(successor)) {
 								
-								if (nodes.containsKey(successor)) {
+								Node node = new Node(new Vector2f(x, y), nodes.get(successor));
+								
+								nodes.put(name, node);
+								
+								if (type.equals("Generator")) {
 									
-									if (type.equals("Node")) {
-										
-										nodes.put(name, new Node(new Vector2f(x, y), nodes.get(successor)));
-									}
-									else if (type.equals("Generator")) {
-										
-										nodes.put(name, new Generator(new Vector2f(x, y), nodes.get(successor), this.entityManager, this.metronome));
-									}
-									change = true;
+									this.entityManager.addEntity(new Generator(this.entityManager, this.metronome, node));
 								}
+								else if (type.equals("Speaker")) {
+									
+									this.entityManager.addEntity(new Speaker(this.metronome, node));
+								}
+								
+								change = true;
 							}
 						}
 					}
