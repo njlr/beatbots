@@ -23,6 +23,11 @@ public class EntityManager implements Entity {
 		return true;
 	}
 	
+	public List<Entity> getEntities() {
+		
+		return this.entities;
+	}
+	
 	public EntityManager() {
 		
 		super();

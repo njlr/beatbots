@@ -18,6 +18,8 @@ public class Note implements Entity {
 	
 	private Node target;
 	
+	private NoteColor noteColor;
+	
 	@Override
 	public boolean isActive() {
 		
@@ -27,6 +29,11 @@ public class Note implements Entity {
 	public Vector2f getPosition() {
 		
 		return this.position;
+	}
+	
+	public NoteColor getNoteColor() {
+		
+		return this.noteColor;
 	}
 	
 	public Note(Node startingNode) {
@@ -39,6 +46,8 @@ public class Note implements Entity {
 		this.direction = new Vector2f();
 		
 		this.target = null;
+		
+		this.noteColor = NoteColor.White;
 	}
 	
 	@Override
@@ -54,6 +63,8 @@ public class Note implements Entity {
 			
 			this.setDirection();
 		}
+		
+		this.noteColor = NoteColor.Red;
 	}
 	
 	@Override
@@ -92,6 +103,25 @@ public class Note implements Entity {
 		
 	}
 	
+	private void next() {
+		
+		if (this.target != null) {
+			
+			if (this.target.getSuccessor() == null) {
+				
+				this.target.getNotes().add(this);
+				
+				this.deactivate();
+			}
+			else {
+				
+				this.target = this.target.getSuccessor();
+				
+				this.setDirection();
+			}
+		}
+	}
+	
 	private void setDirection() {
 		
 		this.direction.set(this.target.getPosition().copy().sub(this.position).normalise());
@@ -109,11 +139,9 @@ public class Note implements Entity {
 			
 			this.position.set(this.target.getPosition());
 			
-			this.target = this.target.getSuccessor();
+			this.next();
 			
-			if (this.target != null) {
-				
-				this.setDirection();
+			if (this.isActive()) {
 				
 				this.move(overflow);
 			}

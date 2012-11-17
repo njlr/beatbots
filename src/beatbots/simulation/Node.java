@@ -1,5 +1,8 @@
 package beatbots.simulation;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,6 +14,8 @@ public class Node implements Entity {
 	private Node successor;
 	
 	private boolean isActive;
+	
+	private Queue<Note> notes;
 
 	@Override
 	public boolean isActive() {
@@ -28,12 +33,19 @@ public class Node implements Entity {
 		return this.successor;
 	}
 	
+	public Queue<Note> getNotes() {
+		
+		return this.notes;
+	}
+	
 	public Node(Vector2f position, Node successor) {
 		
 		super();
 		
 		this.position = position;
 		this.successor = successor;
+		
+		this.notes = new ConcurrentLinkedQueue<Note>();
 	}
 	
 	public Node(Vector2f position) {
@@ -49,7 +61,6 @@ public class Node implements Entity {
 
 	@Override
 	public void update(GameContainer container, int delta) {
-		// TODO Auto-generated method stub
 		
 	}
 

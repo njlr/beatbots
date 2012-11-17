@@ -62,7 +62,14 @@ public class Speaker implements Entity, MetronomeListener {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		if (!this.node.isActive()) {
+		if (this.node.isActive()) {
+			
+			while (!this.node.getNotes().isEmpty()) {
+				
+				this.noteColor.add(this.node.getNotes().remove().getNoteColor());
+			}
+		}
+		else {
 			
 			this.deactivate();
 		}
@@ -99,9 +106,7 @@ public class Speaker implements Entity, MetronomeListener {
 		
 		if (!this.noteColor.isEmpty()) {
 			
-			NoteColor noteColor = this.noteColor.remove();
-			
-			switch (noteColor) {
+			switch (this.noteColor.remove()) {
 			
 			case Red: 
 				
