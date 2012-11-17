@@ -25,8 +25,8 @@ public strictfp final class GameStatePlaying extends BasicGameState {
 		this.entityManager = new EntityManager();
 		
 		Metronome metronome = new Metronome();
-		Sequence sequence = new Sequence(metronome);
-		BeatBotsMap beatBotsMap = new BeatBotsMap(this.entityManager, metronome, sequence, "assets/maps/Test.tmx");
+		Sequence sequence = new Sequence(metronome, "assets/maps/Song01.tmx");
+		BeatBotsMap beatBotsMap = new BeatBotsMap(this.entityManager, metronome, sequence, "assets/maps/Map01.tmx");
 		
 		this.entityManager.addEntity(metronome);
 		this.entityManager.addEntity(sequence);

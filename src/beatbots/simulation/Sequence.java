@@ -16,6 +16,8 @@ public class Sequence implements Entity, MetronomeListener {
 	
 	private Metronome metronome;
 	
+	String sequenceReference;
+	
 	private List<NoteColor> sequence;
 	
 	private Queue<NoteColor> recording;
@@ -47,11 +49,12 @@ public class Sequence implements Entity, MetronomeListener {
 		}
 	}
 	
-	public Sequence(Metronome metronome) {
+	public Sequence(Metronome metronome, String sequenceReference) {
 		
 		super();
 		
 		this.metronome = metronome;
+		this.sequenceReference = sequenceReference;
 		
 		this.sequence = new ArrayList<NoteColor>();
 		
@@ -65,7 +68,7 @@ public class Sequence implements Entity, MetronomeListener {
 		
 		this.sequence.clear();
 		
-		TiledMap tiledMap = new TiledMap("assets/maps/Song00.tmx");
+		TiledMap tiledMap = new TiledMap(this.sequenceReference);
 
 		for (int x = 0; x < tiledMap.getWidth(); x++) {
 			
