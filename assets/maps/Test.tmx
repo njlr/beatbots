@@ -9,34 +9,24 @@
   </data>
  </layer>
  <objectgroup color="#55ff00" name="Nodes" width="20" height="15">
-  <object name="Node01" type="Node" x="47" y="213" width="32" height="32">
+  <object name="Node01" type="Generator" x="47" y="213" width="32" height="32">
    <properties>
     <property name="Successor" value="Node02"/>
    </properties>
   </object>
-  <object name="Node02" type="Node" x="226" y="213" width="32" height="32">
+  <object name="Node02" type="Node" x="218" y="102" width="32" height="32">
    <properties>
     <property name="Successor" value="Node03"/>
    </properties>
   </object>
-  <object name="Node03" type="Node" x="228" y="355" width="32" height="32">
-   <properties>
-    <property name="Successor" value="Node04"/>
-   </properties>
-  </object>
-  <object name="Node04" type="Node" x="377" y="359" width="32" height="32">
-   <properties>
-    <property name="Successor" value="Node05"/>
-   </properties>
-  </object>
-  <object name="Node05" type="Node" x="373" y="217" width="32" height="32">
-   <properties>
-    <property name="Successor" value="Node06"/>
-   </properties>
-  </object>
-  <object name="Node06" type="Node" x="543" y="214" width="32" height="32">
+  <object name="Node04" type="Speaker" x="543" y="214" width="32" height="32">
    <properties>
     <property name="Successor" value=""/>
+   </properties>
+  </object>
+  <object name="Node03" type="Node" x="359" y="100" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node04"/>
    </properties>
   </object>
  </objectgroup>
