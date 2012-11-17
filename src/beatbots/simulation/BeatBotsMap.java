@@ -13,6 +13,7 @@ public strictfp final class BeatBotsMap implements Entity {
 	
 	private EntityManager entityManager;
 	private Metronome metronome;
+	private Sequence sequence;
 	
 	private String mapReference;
 	
@@ -24,12 +25,13 @@ public strictfp final class BeatBotsMap implements Entity {
 		return this.isActive;
 	}
 	
-	public BeatBotsMap(EntityManager entityManager, Metronome metronome, String mapReference) {
+	public BeatBotsMap(EntityManager entityManager, Metronome metronome, Sequence sequence, String mapReference) {
 		
 		super();
 		
 		this.entityManager = entityManager;
 		this.metronome = metronome;
+		this.sequence = sequence;
 		
 		this.mapReference = mapReference;
 	}
@@ -79,7 +81,7 @@ public strictfp final class BeatBotsMap implements Entity {
 								}
 								else if (type.equals("Speaker")) {
 									
-									this.entityManager.addEntity(new Speaker(this.metronome, node));
+									this.entityManager.addEntity(new Speaker(this.sequence, node));
 								}
 								
 								change = true;
@@ -96,7 +98,7 @@ public strictfp final class BeatBotsMap implements Entity {
 								}
 								else if (type.equals("Speaker")) {
 									
-									this.entityManager.addEntity(new Speaker(this.metronome, node));
+									this.entityManager.addEntity(new Speaker(this.sequence, node));
 								}
 								
 								change = true;

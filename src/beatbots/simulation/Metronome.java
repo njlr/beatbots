@@ -21,7 +21,6 @@ public strictfp final class Metronome implements Entity {
 	private Set<MetronomeListener> listeners;
 	
 	private Sound soundBeat;
-	private Sound soundBar;
 
 	@Override
 	public boolean isActive() {
@@ -49,8 +48,6 @@ public strictfp final class Metronome implements Entity {
 		this.beatCount = 0;
 		
 		this.soundBeat = new Sound("assets/sfx/Beat.wav");
-		
-		this.soundBar = new Sound("assets/sfx/Bar.wav");
 	}
 
 	@Override
@@ -105,25 +102,6 @@ public strictfp final class Metronome implements Entity {
 		
 		this.beatCount++;
 		
-		if (this.beatCount == BEATS_PER_BAR) {
-			
-			this.bar();
-		}
-		else {
-			
-			this.soundBeat.play();
-		}
-	}
-	
-	private void bar() {
-		
-		for (MetronomeListener i : this.listeners) {
-			
-			i.bar();
-		}
-		
-		this.soundBar.play();
-		
-		this.beatCount = 0;
+		this.soundBeat.play();
 	}
 }

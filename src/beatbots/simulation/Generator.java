@@ -75,9 +75,4 @@ public class Generator implements Entity, MetronomeListener {
 		
 		this.entityManager.addEntity(new Note(this.node));
 	}
-
-	@Override
-	public void bar() {
-		
-	}
 }

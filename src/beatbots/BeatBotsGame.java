@@ -37,6 +37,7 @@ public strictfp final class BeatBotsGame extends StateBasedGame {
 		AppGameContainer appGameContainer = new AppGameContainer(scalableGame, 640, 480, false);
 		
 		appGameContainer.setTargetFrameRate(60);
+		appGameContainer.setShowFPS(false);
 
 		appGameContainer.start();
 	}
