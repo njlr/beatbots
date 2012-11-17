@@ -19,7 +19,7 @@
     <property name="Successor" value="Node03"/>
    </properties>
   </object>
-  <object name="Node04" type="Node" x="543" y="214" width="32" height="32">
+  <object name="Node04" type="Speaker" x="543" y="214" width="32" height="32">
    <properties>
     <property name="Successor" value=""/>
    </properties>
