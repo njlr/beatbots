@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Note implements Entity {
 	
-	private static final float NOTE_SPEED = 0.1f;
+	private static final float NOTE_SPEED = 0.02f;
 
 	private Node startingNode;
 	
@@ -50,7 +50,10 @@ public class Note implements Entity {
 		
 		this.target = this.startingNode.getSuccessor();
 		
-		this.setVelocityToTarget();
+		if (this.target != null) {
+			
+			this.setVelocityToTarget();
+		}
 	}
 	
 	@Override
@@ -70,7 +73,10 @@ public class Note implements Entity {
 				
 				this.target = this.target.getSuccessor();
 				
-				this.setVelocityToTarget();
+				if (this.target != null) {
+					
+					this.setVelocityToTarget();
+				}
 			}
 		}
 	}
