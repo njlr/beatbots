@@ -67,14 +67,6 @@ public class Node implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		graphics.setColor(Color.white);
-		
-		graphics.drawRect(
-				this.position.x - 14f,  
-				this.position.y - 14f, 
-				28f, 
-				28f);
-		
 		if (this.getSuccessor() != null) {
 			
 			graphics.setColor(Color.yellow);

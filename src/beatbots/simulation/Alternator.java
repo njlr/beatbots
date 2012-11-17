@@ -3,10 +3,11 @@ package beatbots.simulation;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.newdawn.slick.Color;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Vector2f;
 
 public strictfp final class Alternator implements Entity {
@@ -23,6 +24,8 @@ public strictfp final class Alternator implements Entity {
 	private Set<Note> notesSeen;
 	
 	private boolean shouldDestroyNext;
+	
+	private Animation animation;
 	
 	@Override
 	public boolean isActive() {
@@ -49,6 +52,10 @@ public strictfp final class Alternator implements Entity {
 		this.notesSeen.clear();
 		
 		this.shouldDestroyNext = true;
+		
+		this.animation = new Animation(new SpriteSheet("assets/Alternator.png", 32, 32), 1);
+		
+		this.animation.setAutoUpdate(false);
 	}
 
 	@Override
@@ -90,18 +97,17 @@ public strictfp final class Alternator implements Entity {
 		
 		if (this.shouldDestroyNext) {
 			
-			graphics.setColor(Color.white);
+			this.animation.setCurrentFrame(0);
 		}
 		else {
 			
-			graphics.setColor(Color.gray);
+			this.animation.setCurrentFrame(1);
 		}
 		
-		graphics.drawOval(
-				this.position.getX() - RADIUS, 
-				this.position.getY() - RADIUS, 
-				RADIUS * 2, 
-				RADIUS * 2);
+		graphics.drawAnimation(
+				this.animation, 
+				this.position.getX() - this.animation.getWidth() / 2, 
+				this.position.getY() - this.animation.getHeight() / 2);
 	}
 
 	@Override

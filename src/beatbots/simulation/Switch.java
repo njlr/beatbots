@@ -73,6 +73,14 @@ public strictfp final class Switch extends Node implements MouseListener {
 				this.getPosition().getY(), 
 				inactiveSuccessor.getPosition().getX(), 
 				inactiveSuccessor.getPosition().getY());
+		
+		graphics.setColor(Color.white);
+		
+		graphics.drawOval(
+				this.getPosition().getX() - 16f, 
+				this.getPosition().getY() - 16f, 
+				32f, 
+				32f);
 	}
 	
 	@Override

@@ -1,9 +1,10 @@
 package beatbots.simulation;
 
-import org.newdawn.slick.Color;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 
 public class Speaker implements Entity {
@@ -12,6 +13,8 @@ public class Speaker implements Entity {
 	private Node node;
 	
 	private boolean isActive;
+	
+	private Animation animation;
 	
 	@Override
 	public boolean isActive() {
@@ -31,6 +34,8 @@ public class Speaker implements Entity {
 	public void init(GameContainer container) throws SlickException {
 		
 		this.isActive = true;
+		
+		this.animation = new Animation(new SpriteSheet("assets/Speaker.png", 32, 32), 33);
 	}
 	
 	@Override
@@ -52,13 +57,10 @@ public class Speaker implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		graphics.setColor(Color.magenta);
-		
-		graphics.drawOval(
-				this.node.getPosition().getX() - 4f, 
-				this.node.getPosition().getY() - 4f, 
-				8f, 
-				8f);
+		graphics.drawAnimation(
+				this.animation, 
+				this.node.getPosition().getX() - this.animation.getWidth() / 2, 
+				this.node.getPosition().getY() - this.animation.getHeight() / 2);
 	}
 
 	@Override

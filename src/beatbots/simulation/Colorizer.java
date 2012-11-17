@@ -2,6 +2,7 @@ package beatbots.simulation;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -16,6 +17,8 @@ public class Colorizer implements Entity {
 	private Vector2f position;
 	
 	private boolean isActive;
+	
+	private Image image;
 
 	@Override
 	public boolean isActive() {
@@ -37,6 +40,8 @@ public class Colorizer implements Entity {
 	public void init(GameContainer container) throws SlickException {
 		
 		this.isActive = true;
+		
+		this.image = new Image("assets/Colorizer.png");
 	}
 
 	@Override
@@ -64,13 +69,11 @@ public class Colorizer implements Entity {
 	@Override
 	public void render(GameContainer container, Graphics graphics) {
 		
-		graphics.setColor(Utils.getColor(this.noteColor));
-		
-		graphics.drawOval(
-				this.position.getX() - RADIUS, 
-				this.position.getY() - RADIUS, 
-				RADIUS * 2, 
-				RADIUS * 2);
+		graphics.drawImage(
+				this.image, 
+				this.position.x - this.image.getWidth() / 2, 
+				this.position.y - this.image.getHeight() / 2, 
+				Utils.getColor(this.noteColor));
 	}
 
 	@Override
