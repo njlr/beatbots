@@ -36,10 +36,15 @@ public class Node implements Entity {
 		this.successor = successor;
 	}
 	
+	public Node(Vector2f position) {
+		
+		this(position, null);
+	}
+	
 	@Override
 	public void init(GameContainer container) {
-		// TODO Auto-generated method stub
 		
+		this.isActive = true;
 	}
 
 	@Override
@@ -58,6 +63,17 @@ public class Node implements Entity {
 				this.position.y - 14f, 
 				28f, 
 				28f);
+		
+		if (this.successor != null) {
+			
+			graphics.setColor(Color.yellow);
+			
+			graphics.drawLine(
+					this.position.x, 
+					this.position.y, 
+					this.successor.getPosition().getX(), 
+					this.successor.getPosition().getY());
+		}
 	}
 
 	@Override
