@@ -156,7 +156,7 @@ public class Sequence implements Entity, MetronomeListener {
 					this.score++;
 				}
 				
-				while (!this.recording.isEmpty()) {
+				// while (!this.recording.isEmpty()) {
 					
 					switch (this.recording.remove()) {
 					
@@ -196,7 +196,7 @@ public class Sequence implements Entity, MetronomeListener {
 						
 						break;
 					}
-				}
+				//}
 			}
 			
 			this.count++;

@@ -16,7 +16,7 @@
   </object>
   <object name="Switch01" type="Switch" x="165" y="213" width="32" height="32">
    <properties>
-    <property name="SuccessorA" value="Node03"/>
+    <property name="SuccessorA" value="Switch02"/>
     <property name="SuccessorB" value="Node04"/>
    </properties>
   </object>
@@ -35,7 +35,7 @@
     <property name="Successor" value="Node05"/>
    </properties>
   </object>
-  <object name="Red" type="Colorizer" x="236" y="151" width="32" height="32">
+  <object name="Red" type="Colorizer" x="421" y="135" width="32" height="32">
    <properties>
     <property name="Color" value="0"/>
    </properties>
@@ -48,6 +48,17 @@
   <object name="Blue" type="Colorizer" x="236" y="282" width="32" height="32">
    <properties>
     <property name="Color" value="1"/>
+   </properties>
+  </object>
+  <object name="Switch02" type="Switch" x="242" y="140" width="32" height="32">
+   <properties>
+    <property name="SuccessorA" value="Node03"/>
+    <property name="SuccessorB" value="Node06"/>
+   </properties>
+  </object>
+  <object name="Node06" type="Node" x="316" y="211" width="32" height="32">
+   <properties>
+    <property name="Successor" value="Node05"/>
    </properties>
   </object>
  </objectgroup>

@@ -9,7 +9,7 @@
   </data>
  </layer>
  <objectgroup name="Nodes" width="20" height="15">
-  <object name="Node01" type="Generator" x="30" y="104" width="32" height="32">
+  <object name="Node01" type="Generator" x="34" y="409" width="32" height="32">
    <properties>
     <property name="Successor" value="Switch01"/>
    </properties>
@@ -22,7 +22,7 @@
   </object>
   <object name="Node02" type="Node" x="177" y="50" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node03"/>
+    <property name="Successor" value="Node08"/>
    </properties>
   </object>
   <object name="Switch02" type="Switch" x="122" y="226" width="32" height="32">
@@ -33,12 +33,12 @@
   </object>
   <object name="Node03" type="Node" x="231" y="96" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node04"/>
+    <property name="Successor" value="Node08"/>
    </properties>
   </object>
   <object name="Node04" type="Node" x="301" y="160" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node05"/>
+    <property name="Successor" value="Node08"/>
    </properties>
   </object>
   <object name="Switch03" type="Switch" x="179" y="279" width="32" height="32">
@@ -49,7 +49,7 @@
   </object>
   <object name="Node05" type="Node" x="364" y="222" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node06"/>
+    <property name="Successor" value="Node08"/>
    </properties>
   </object>
   <object name="Red" type="Colorizer" x="115" y="112" width="32" height="32">
@@ -91,7 +91,7 @@
   </object>
   <object name="Node06" type="Node" x="432" y="292" width="32" height="32">
    <properties>
-    <property name="Successor" value="Node07"/>
+    <property name="Successor" value="Node08"/>
    </properties>
   </object>
   <object name="Node07" type="Node" x="496" y="416" width="32" height="32">
@@ -99,7 +99,7 @@
     <property name="Successor" value="Node08"/>
    </properties>
   </object>
-  <object name="Node08" type="Speaker" x="588" y="230" width="32" height="32">
+  <object name="Node08" type="Speaker" x="559" y="37" width="32" height="32">
    <properties>
     <property name="" value=""/>
    </properties>
