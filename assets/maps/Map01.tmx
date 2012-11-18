@@ -9,7 +9,7 @@
   </data>
  </layer>
  <objectgroup name="Nodes" width="20" height="15">
-  <object name="Node01" type="Generator" x="14" y="116" width="32" height="32">
+  <object name="Node01" type="Generator" x="30" y="104" width="32" height="32">
    <properties>
     <property name="Successor" value="Switch01"/>
    </properties>
@@ -94,12 +94,12 @@
     <property name="Successor" value="Node07"/>
    </properties>
   </object>
-  <object name="Node07" type="Node" x="546" y="405" width="32" height="32">
+  <object name="Node07" type="Node" x="496" y="416" width="32" height="32">
    <properties>
     <property name="Successor" value="Node08"/>
    </properties>
   </object>
-  <object name="Node08" type="Speaker" x="539" y="59" width="32" height="32">
+  <object name="Node08" type="Speaker" x="588" y="230" width="32" height="32">
    <properties>
     <property name="" value=""/>
    </properties>

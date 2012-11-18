@@ -30,6 +30,10 @@ public class Sequence implements Entity, MetronomeListener {
 	private Sound soundGreen;
 	
 	private int score;
+	
+	private boolean startedRecording;
+	
+	private int count;
 
 	@Override
 	public boolean isActive() {
@@ -39,13 +43,13 @@ public class Sequence implements Entity, MetronomeListener {
 	
 	public int getScore() {
 		
-		if ((this.metronome.getBeatCount() == 0) || (this.sequence.isEmpty())) {
+		if ((this.count == 0) || (this.sequence.isEmpty())) {
 			
-			return 50;
+			return 0;
 		}
 		else {
 			
-			return (this.score * 100) / Math.min(this.metronome.getBeatCount(), this.sequence.size());
+			return (this.score * 100) / Math.min(this.count, this.sequence.size());
 		}
 	}
 	
@@ -66,13 +70,17 @@ public class Sequence implements Entity, MetronomeListener {
 		
 		this.score = 0;
 		
+		this.startedRecording = false;
+		
+		this.count = 0;
+		
 		this.sequence.clear();
 		
 		TiledMap tiledMap = new TiledMap(this.sequenceReference);
 
-		for (int x = 0; x < tiledMap.getWidth(); x++) {
+		for (int y = 0; y < tiledMap.getHeight(); y++) {
 			
-			for (int y = 0; y < tiledMap.getHeight(); y++) {
+			for (int x = 0; x < tiledMap.getWidth(); x++) {
 				
 				for (int l = 0; l < tiledMap.getLayerCount(); l++) {
 					
@@ -106,13 +114,13 @@ public class Sequence implements Entity, MetronomeListener {
 		int x = 32 * 5;
 		int y = 4;
 		
-		for (int i = this.metronome.getBeatCount(); i < Math.min(this.sequence.size(), this.metronome.getBeatCount() + 10); i++) {
+		for (int i = this.count; i < Math.min(this.sequence.size(), this.count + 10); i++) {
 			
 			graphics.setColor(Utils.getColor(this.sequence.get(i)));
 			
 			graphics.drawRect(x, y, 28, 28);
 			
-			if (i == this.metronome.getBeatCount()) {
+			if (i == this.count) {
 				
 				graphics.fillRect(x + 4, y + 4, 21, 21);
 			}
@@ -139,59 +147,66 @@ public class Sequence implements Entity, MetronomeListener {
 	@Override
 	public void beat(int beatCount) {
 		
-		if (!this.recording.isEmpty()) {
+		if (this.startedRecording) {
 			
-			if (this.recording.peek() == this.sequence.get(beatCount)) {
+			if (!this.recording.isEmpty()) {
 				
-				this.score++;
-			}
-			
-			while (!this.recording.isEmpty()) {
+				if (this.recording.peek() == this.sequence.get(this.count)) {
+					
+					this.score++;
+				}
 				
-				switch (this.recording.remove()) {
-				
-				case Red: 
+				while (!this.recording.isEmpty()) {
 					
-					this.soundRed.play();
+					switch (this.recording.remove()) {
 					
-					break;
-					
-				case Blue: 
-					
-					this.soundBlue.play();
-					
-					break;
-					
-				case Yellow: 
-					
-					this.soundYellow.play();
-					
-					break;
-					
-				case Magenta: 
-					
-					this.soundMagenta.play();
-					
-					break;
-					
-				case Orange:
-					
-					this.soundOrange.play();
-					
-					break;
-					
-				case Green:
-					
-					this.soundGreen.play();
-					
-					break;
+					case Red: 
+						
+						this.soundRed.play();
+						
+						break;
+						
+					case Blue: 
+						
+						this.soundBlue.play();
+						
+						break;
+						
+					case Yellow: 
+						
+						this.soundYellow.play();
+						
+						break;
+						
+					case Magenta: 
+						
+						this.soundMagenta.play();
+						
+						break;
+						
+					case Orange:
+						
+						this.soundOrange.play();
+						
+						break;
+						
+					case Green:
+						
+						this.soundGreen.play();
+						
+						break;
+					}
 				}
 			}
+			
+			this.count++;
 		}
 	}
 	
 	public void record(NoteColor noteColor) {
 		
 		this.recording.add(noteColor);
+		
+		this.startedRecording = true;
 	}
 }
